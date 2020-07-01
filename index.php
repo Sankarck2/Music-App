@@ -50,7 +50,7 @@ if(isset($_POST["commit"])){
       
          $_SESSION['login_user'] = $username;
          
-         header("location: examples/dashboard.html");
+         header("location: examples/dashboard.php");
       }else {
          $error = "Your Login Name or Password is invalid";
       }

@@ -10,6 +10,98 @@ Coded by Creative Tim
 =========================================================
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
 <!DOCTYPE html>
+
+<?php
+require_once "config/config.php";
+
+if(isset($_POST['sub'])){
+
+$sname=$_POST['song_name'];
+$aname=$_POST['artist_name'];
+$mname=$_POST['movie_name'];
+$genre=$_POST['genre'];
+$date=$_POST['date'];
+$music1=$_POST['music'];
+$thumb1=$_POST['thumb'];
+
+
+  	  
+
+	$target_path = $_SERVER["CONTEXT_DOCUMENT_ROOT"]."/examples/uploads/thumbimg/";
+	$target_path1 = $_SERVER["CONTEXT_DOCUMENT_ROOT"]."/examples/uploads/music/";
+	
+
+$target_path = $target_path.basename($_FILES['audio_track']['name']);
+
+$target_path1 = $target_path1.basename($_FILES['thumbnail']['name']);
+
+$nmusic="";
+	$nthumb="";
+
+
+ $audio=move_uploaded_file($_FILES['audio_track']['tmp_name'], $target_path);
+   $img=move_uploaded_file($_FILES['thumbnail']['tmp_name'], $target_path1);
+
+
+	    echo '<script>document.getElementById("thumb").value="'.$target_path1.'";</script>';
+	 
+  echo '<script>document.getElementById("music").value="'.$target_path.'";</script>';
+
+    if($_POST['id']=="0"){
+	   
+	   
+$query ="INSERT INTO song_details(song_name, movie_name, artist_name,genre,date,thumb_img,audio) VALUES ( '". $sname."','".$mname."','".$aname."','". $genre."','".$date."','".$target_path."','".$target_path1."' )";
+        mysqli_query($db, $query);
+
+   }else{
+	   
+
+	$query =" UPDATE song_details
+SET song_name = '". $sname."', movie_name= '". $mname."',artist_name = '". $aname."',genre = '". $genre."', date= '". $date."', thumb_img= '". (($_FILES['thumbnail']['name']!="")?$target_path1:$thumb1)."', audio= '".(($_FILES['audio_track']['name']!="")?$target_path:$music1)."'
+WHERE id = '". $_POST['id']."'";
+	      mysqli_query($db, $query);
+		  
+		  
+		  
+	   
+   }
+   
+        header("location: dashboard.php");
+   
+
+
+}
+if($_REQUEST['value']=="delete"){
+
+
+
+
+$sql = "DELETE FROM song_details where id=".$_REQUEST['id'];
+$result = $db->query($sql);
+
+
+
+
+
+}
+if($_REQUEST['id']!="0"){
+
+
+
+
+$sql = "SELECT * FROM song_details where id=".$_REQUEST['id'];
+$result = $db->query($sql);
+
+
+
+$coursedata = $result->fetch_assoc();
+
+}
+
+?>
+
+
+
 <html lang="en">
 
 <head>
@@ -22,40 +114,37 @@ The above copyright notice and this permission notice shall be included in all c
   </title>
   <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css"
-    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
   <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="../assets/demo/demo.css" rel="stylesheet" />
-  <style>
-    *{
-      box-sizing: border-box;
-    }
-    .registerBtn{
-      margin-bottom: 25px;
-      margin-right: 15px;
-    }
-  </style>
+  <link href="../css/registration.css" rel="stylesheet" media="all">
+
 </head>
 
 <body class="">
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+      <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+        Tip 2: you can also add an image using data-image tag
+    -->
       <div class="logo"><a href="http://www.creative-tim.com" class="simple-text logo-normal">
           Creative Tim
         </a></div>
-      <div class="sidebar-wrapper ">
+      <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item active ">
-            <a class="nav-link" href="./dashboard.html">
+          <li class="nav-item  ">
+            <a class="nav-link" href="./dashboard.php">
               <i class="material-icons">dashboard</i>
               <p>Dashboard</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./user.html">
+          <li class="nav-item active ">
+            <a class="nav-link" href="./user.php">
               <i class="material-icons">person</i>
               <p>User Profile</p>
             </a>
@@ -70,10 +159,9 @@ The above copyright notice and this permission notice shall be included in all c
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;">Dashboard</a>
+            <a class="navbar-brand" href="javascript:;">User Profile</a>
           </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
-            aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
             <span class="navbar-toggler-icon icon-bar"></span>
             <span class="navbar-toggler-icon icon-bar"></span>
@@ -99,8 +187,7 @@ The above copyright notice and this permission notice shall be included in all c
                 </a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="material-icons">notifications</i>
                   <span class="notification">5</span>
                   <p class="d-lg-none d-md-block">
@@ -116,8 +203,7 @@ The above copyright notice and this permission notice shall be included in all c
                 </div>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="material-icons">person</i>
                   <p class="d-lg-none d-md-block">
                     Account
@@ -135,155 +221,122 @@ The above copyright notice and this permission notice shall be included in all c
         </div>
       </nav>
       <!-- End Navbar -->
-      <div class="content">
-        <div class="container-fluid">
-
-          <div class="row">
-
-            <div class="col-md-12">
-              <button type="button" class="btn btn-primary pull-right registerBtn" onclick="window.location.href='./user.html'">Register</button>
-
-              <div class="card">
-                <div class="card-header card-header-primary">
-                  <h4 class="card-title ">Song List</h4>
+      <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+            <div class="card card-5">
+                <div class="card-heading">
+                    <h2 class="title"> Song Details Upload Form</h2>
                 </div>
                 <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table">
-                      <thead class=" text-primary">
-                        <th>
-                          ID
-                        </th>
-                        <th>
-                          Name
-                        </th>
-                        <th>
-                          Country
-                        </th>
-                        <th>
-                          City
-                        </th>
-                        <th>
-                          Salary
-                        </th>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>
-                            1
-                          </td>
-                          <td>
-                            Dakota Rice
-                          </td>
-                          <td>
-                            Niger
-                          </td>
-                          <td>
-                            Oud-Turnhout
-                          </td>
-                          <td class="text-primary">
-                            $36,738
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            2
-                          </td>
-                          <td>
-                            Minerva Hooper
-                          </td>
-                          <td>
-                            Curaçao
-                          </td>
-                          <td>
-                            Sinaai-Waas
-                          </td>
-                          <td class="text-primary">
-                            $23,789
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            3
-                          </td>
-                          <td>
-                            Sage Rodriguez
-                          </td>
-                          <td>
-                            Netherlands
-                          </td>
-                          <td>
-                            Baileux
-                          </td>
-                          <td class="text-primary">
-                            $56,142
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            4
-                          </td>
-                          <td>
-                            Philip Chaney
-                          </td>
-                          <td>
-                            Korea, South
-                          </td>
-                          <td>
-                            Overland Park
-                          </td>
-                          <td class="text-primary">
-                            $38,735
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            5
-                          </td>
-                          <td>
-                            Doris Greene
-                          </td>
-                          <td>
-                            Malawi
-                          </td>
-                          <td>
-                            Feldkirchen in Kärnten
-                          </td>
-                          <td class="text-primary">
-                            $63,542
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            6
-                          </td>
-                          <td>
-                            Mason Porter
-                          </td>
-                          <td>
-                            Chile
-                          </td>
-                          <td>
-                            Gloucester
-                          </td>
-                          <td class="text-primary">
-                            $78,615
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
+                    <form enctype="multipart/form-data" action="#" method="POST"  >
+                        <div class="form-row m-b-55">
+                            <div class="name">Song Name</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-5" type="text" name="song_name" value="<?php echo (isset($coursedata['song_name'])) ? $coursedata['song_name'] : '';?>">
+                                </div>
+                            </div>
+                        </div>
+						
+                        <div class="form-row">
+                            <div class="name">Artist Name</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-5" type="text"  name="artist_name" value="<?php echo (isset($coursedata['artist_name'])) ? $coursedata['artist_name'] : '';?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Movie Name</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-5" type="text" name="movie_name" value="<?php echo (isset($coursedata['movie_name'])) ? $coursedata['movie_name'] : '';?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Genre</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-5" type="text" name="genre" value="<?php echo (isset($coursedata['genre'])) ?$coursedata['genre']: '';?>">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="form-row">
+                            <div class="name">Subject</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <div class="rs-select2 js-select-simple select--no-search">
+                                        <select name="subject">
+                                            <option disabled="disabled" selected="selected">Choose option</option>
+                                            <option>Melody</option>
+                                            <option>Folk</option>
+                                            <option>Theme </option>
+                                        </select>
+                                        <div class="select-dropdown"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
 
-          </div>
+                        <div class="form-row m-b-55">
+                            <div class="name">Thumbnail</div>
+                            <div class="value">
+                                <div class="input-group">
+                                        <div class="input-group-desc">
+                                            <input class="input--style-5" type="file" name="thumbnail" accept="image/x-png,image/gif,image/jpeg" >
+                                        </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
+
+
+							
+							    <input class='input--style-5' type='hidden' id='thumb' name='thumb'   value='<?php echo (isset($coursedata['thumb_img'])) ? $coursedata['thumb_img'] : '';?>'>
+                             
+					
+				
+                        <div class="form-row m-b-55">
+                            <div class="name">Audio Track</div>
+                            <div class="value">
+                                <div class="input-group">
+                                        <div class="input-group-desc">
+                                            <input class="input--style-5" accept="audio/mp3,audio/*;capture=microphone" type="file" name="audio_track" >
+                                        </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
+					
+						
+							
+							   <input class='input--style-5' type='hidden' id='music' name='music' value='<?php echo (isset($coursedata['audio'])) ? $coursedata['audio'] : '';?>'>
+                             
+					
+                        <div class="form-row">
+                            <div class="name">Date</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-5" type="date" name="date" value="<?php echo (isset($coursedata['date'])) ? $coursedata['date'] : '';?>">
+                                </div>
+                            </div>
+                        </div>
+               
+                      
+                        <div>
+						     <input class="input--style-5" type="hidden" name="id" value="<?php echo (isset($_REQUEST['id'])) ?$_REQUEST['id'] : '';?>">
+                            <button class="btn btn--radius-2 btn--red"  name="sub" type="submit">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
       </div>
-
+      
     </div>
   </div>
-
+  
   <!--   Core JS Files   -->
   <script src="../assets/js/core/jquery.min.js"></script>
   <script src="../assets/js/core/popper.min.js"></script>
@@ -328,8 +381,8 @@ The above copyright notice and this permission notice shall be included in all c
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="../assets/demo/demo.js"></script>
   <script>
-    $(document).ready(function () {
-      $().ready(function () {
+    $(document).ready(function() {
+      $().ready(function() {
         $sidebar = $('.sidebar');
 
         $sidebar_img_container = $sidebar.find('.sidebar-background');
@@ -349,7 +402,7 @@ The above copyright notice and this permission notice shall be included in all c
 
         }
 
-        $('.fixed-plugin a').click(function (event) {
+        $('.fixed-plugin a').click(function(event) {
           // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
           if ($(this).hasClass('switch-trigger')) {
             if (event.stopPropagation) {
@@ -360,7 +413,7 @@ The above copyright notice and this permission notice shall be included in all c
           }
         });
 
-        $('.fixed-plugin .active-color span').click(function () {
+        $('.fixed-plugin .active-color span').click(function() {
           $full_page_background = $('.full-page-background');
 
           $(this).siblings().removeClass('active');
@@ -381,7 +434,7 @@ The above copyright notice and this permission notice shall be included in all c
           }
         });
 
-        $('.fixed-plugin .background-color .badge').click(function () {
+        $('.fixed-plugin .background-color .badge').click(function() {
           $(this).siblings().removeClass('active');
           $(this).addClass('active');
 
@@ -392,7 +445,7 @@ The above copyright notice and this permission notice shall be included in all c
           }
         });
 
-        $('.fixed-plugin .img-holder').click(function () {
+        $('.fixed-plugin .img-holder').click(function() {
           $full_page_background = $('.full-page-background');
 
           $(this).parent('li').siblings().removeClass('active');
@@ -402,7 +455,7 @@ The above copyright notice and this permission notice shall be included in all c
           var new_image = $(this).find("img").attr('src');
 
           if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
-            $sidebar_img_container.fadeOut('fast', function () {
+            $sidebar_img_container.fadeOut('fast', function() {
               $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
               $sidebar_img_container.fadeIn('fast');
             });
@@ -411,7 +464,7 @@ The above copyright notice and this permission notice shall be included in all c
           if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
             var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
 
-            $full_page_background.fadeOut('fast', function () {
+            $full_page_background.fadeOut('fast', function() {
               $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
               $full_page_background.fadeIn('fast');
             });
@@ -430,7 +483,7 @@ The above copyright notice and this permission notice shall be included in all c
           }
         });
 
-        $('.switch-sidebar-image input').change(function () {
+        $('.switch-sidebar-image input').change(function() {
           $full_page_background = $('.full-page-background');
 
           $input = $(this);
@@ -462,7 +515,7 @@ The above copyright notice and this permission notice shall be included in all c
           }
         });
 
-        $('.switch-sidebar-mini input').change(function () {
+        $('.switch-sidebar-mini input').change(function() {
           $body = $('body');
 
           $input = $(this);
@@ -477,7 +530,7 @@ The above copyright notice and this permission notice shall be included in all c
 
             $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
 
-            setTimeout(function () {
+            setTimeout(function() {
               $('body').addClass('sidebar-mini');
 
               md.misc.sidebar_mini_active = true;
@@ -485,12 +538,12 @@ The above copyright notice and this permission notice shall be included in all c
           }
 
           // we simulate the window Resize so the charts will get updated in realtime.
-          var simulateWindowResize = setInterval(function () {
+          var simulateWindowResize = setInterval(function() {
             window.dispatchEvent(new Event('resize'));
           }, 180);
 
           // we stop the simulation of Window Resize after the animations are completed
-          setTimeout(function () {
+          setTimeout(function() {
             clearInterval(simulateWindowResize);
           }, 1000);
 

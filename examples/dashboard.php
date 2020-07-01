@@ -10,22 +10,6 @@ Coded by Creative Tim
 =========================================================
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
 <!DOCTYPE html>
-
-<?php
-
-if(isset($_POST['sub'])){
-
-$sname=$_POST['song_name']);
-$aname=$_POST['artist_name']);
-$mname=$_POST['movie_name']);
-$genre=$_POST['genre']);
-$date=$_POST['date']);
-
-print_r($date);
-?>
-
-
-
 <html lang="en">
 
 <head>
@@ -38,36 +22,39 @@ print_r($date);
   </title>
   <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
   <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="../assets/demo/demo.css" rel="stylesheet" />
-  <link href="../css/registration.css" rel="stylesheet" media="all">
-
+  <style>
+    *{
+      box-sizing: border-box;
+    }
+    .registerBtn{
+      margin-bottom: 25px;
+      margin-right: 15px;
+    }
+  </style>
 </head>
 
 <body class="">
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
-      <!--
-        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-
-        Tip 2: you can also add an image using data-image tag
-    -->
       <div class="logo"><a href="http://www.creative-tim.com" class="simple-text logo-normal">
           Creative Tim
         </a></div>
-      <div class="sidebar-wrapper">
+      <div class="sidebar-wrapper ">
         <ul class="nav">
-          <li class="nav-item  ">
+          <li class="nav-item active ">
             <a class="nav-link" href="./dashboard.html">
               <i class="material-icons">dashboard</i>
               <p>Dashboard</p>
             </a>
           </li>
-          <li class="nav-item active ">
+          <li class="nav-item ">
             <a class="nav-link" href="./user.html">
               <i class="material-icons">person</i>
               <p>User Profile</p>
@@ -83,9 +70,10 @@ print_r($date);
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;">User Profile</a>
+            <a class="navbar-brand" href="javascript:;">Dashboard</a>
           </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+            aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
             <span class="navbar-toggler-icon icon-bar"></span>
             <span class="navbar-toggler-icon icon-bar"></span>
@@ -111,7 +99,8 @@ print_r($date);
                 </a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
                   <i class="material-icons">notifications</i>
                   <span class="notification">5</span>
                   <p class="d-lg-none d-md-block">
@@ -127,7 +116,8 @@ print_r($date);
                 </div>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
                   <i class="material-icons">person</i>
                   <p class="d-lg-none d-md-block">
                     Account
@@ -145,109 +135,97 @@ print_r($date);
         </div>
       </nav>
       <!-- End Navbar -->
-      <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
-        <div class="wrapper wrapper--w790">
-            <div class="card card-5">
-                <div class="card-heading">
-                    <h2 class="title"> Song Details Upload Form</h2>
+      <div class="content">
+        <div class="container-fluid">
+
+          <div class="row">
+
+            <div class="col-md-12">
+              <button type="button" class="btn btn-primary pull-right registerBtn" onclick="window.location.href='./user.php?id=0'">Register</button>
+
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title ">Song List</h4>
                 </div>
                 <div class="card-body">
-                    <form enctype="multipart/form-data" action="#" method="POST"  >
-                        <div class="form-row m-b-55">
-                            <div class="name">Song Name</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <input class="input--style-5" type="text" name="song_name">
-                                </div>
-                            </div>
-                        </div>
-						
-                        <div class="form-row">
-                            <div class="name">Artist Name</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <input class="input--style-5" type="text" name="artist_name">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="name">Movie Name</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <input class="input--style-5" type="text" name="movie_name">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="name">Genre</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <input class="input--style-5" type="text" name="genre">
-                                </div>
-                            </div>
-                        </div>
-                        <!-- <div class="form-row">
-                            <div class="name">Subject</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <div class="rs-select2 js-select-simple select--no-search">
-                                        <select name="subject">
-                                            <option disabled="disabled" selected="selected">Choose option</option>
-                                            <option>Melody</option>
-                                            <option>Folk</option>
-                                            <option>Theme </option>
-                                        </select>
-                                        <div class="select-dropdown"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
+                  <div class="table-responsive">
+				  <?php
+				  
+			
+require_once "config/config.php";
 
-                        <div class="form-row m-b-55">
-                            <div class="name">Thumbnail</div>
-                            <div class="value">
-                                <div class="input-group">
-                                        <div class="input-group-desc">
-                                            <input class="input--style-5" type="file" name="thumbnail">
-                                        </div>
-                                   
-                                </div>
-                            </div>
-                        </div>
+	  if($_REQUEST['value']=="delete"){
 
-                        <div class="form-row m-b-55">
-                            <div class="name">Audio Track</div>
-                            <div class="value">
-                                <div class="input-group">
-                                        <div class="input-group-desc">
-                                            <input class="input--style-5" type="file" name="audio_track">
-                                        </div>
-                                   
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="name">Date</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <input class="input--style-5" type="date" name="date">
-                                </div>
-                            </div>
-                        </div>
-               
-                      
-                        <div>
-                            <button class="btn btn--radius-2 btn--red"  name="sub" type="submit">Add</button>
-                        </div>
-                    </form>
+
+
+
+$sql = "DELETE FROM song_details where id=".$_REQUEST['id'];
+$result = $db->query($sql);
+
+
+
+
+
+}
+
+$result = mysqli_query($db,"SELECT * FROM song_details");
+
+echo " <table class='table'>
+                      <thead class=' text-primary'>
+                        <th>
+                         ID
+                        </th>
+                        <th>
+                         Song Name
+                        </th>
+                        <th>
+                            Artist Name
+                        </th>
+                        <th>
+                          Genre
+                        </th>
+                        <th>
+                          Movie name
+                        </th>
+						 <th>
+                          Edit
+                        </th>
+						 <th>
+                       Delete
+                        </th>
+                      </thead>
+					    <tbody>";
+
+while($row = mysqli_fetch_array($result))
+{
+echo "<tr>";
+echo "<td>" . $row['id'] . "</td>";
+echo "<td>" . $row['song_name'] . "</td>";
+echo "<td>" . $row['artist_name'] . "</td>";
+echo "<td>" . $row['genre'] . "</td>";
+echo "<td>" . $row['movie_name'] . "</td>";
+echo "<td><a href='./user.php?id=".$row['id']."'>Edit</a></td>";
+echo "<td><a href='./dashboard.php?id=".$row['id']."&value=delete'>Delete</a></td>";
+
+echo "</tr>";
+}
+echo "  </tbody></table>";
+
+mysqli_close($con);
+?>
+             
+                  </div>
                 </div>
+              </div>
             </div>
+
+          </div>
         </div>
       </div>
-      
+
     </div>
   </div>
-  
+
   <!--   Core JS Files   -->
   <script src="../assets/js/core/jquery.min.js"></script>
   <script src="../assets/js/core/popper.min.js"></script>
@@ -292,8 +270,8 @@ print_r($date);
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="../assets/demo/demo.js"></script>
   <script>
-    $(document).ready(function() {
-      $().ready(function() {
+    $(document).ready(function () {
+      $().ready(function () {
         $sidebar = $('.sidebar');
 
         $sidebar_img_container = $sidebar.find('.sidebar-background');
@@ -313,7 +291,7 @@ print_r($date);
 
         }
 
-        $('.fixed-plugin a').click(function(event) {
+        $('.fixed-plugin a').click(function (event) {
           // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
           if ($(this).hasClass('switch-trigger')) {
             if (event.stopPropagation) {
@@ -324,7 +302,7 @@ print_r($date);
           }
         });
 
-        $('.fixed-plugin .active-color span').click(function() {
+        $('.fixed-plugin .active-color span').click(function () {
           $full_page_background = $('.full-page-background');
 
           $(this).siblings().removeClass('active');
@@ -345,7 +323,7 @@ print_r($date);
           }
         });
 
-        $('.fixed-plugin .background-color .badge').click(function() {
+        $('.fixed-plugin .background-color .badge').click(function () {
           $(this).siblings().removeClass('active');
           $(this).addClass('active');
 
@@ -356,7 +334,7 @@ print_r($date);
           }
         });
 
-        $('.fixed-plugin .img-holder').click(function() {
+        $('.fixed-plugin .img-holder').click(function () {
           $full_page_background = $('.full-page-background');
 
           $(this).parent('li').siblings().removeClass('active');
@@ -366,7 +344,7 @@ print_r($date);
           var new_image = $(this).find("img").attr('src');
 
           if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
-            $sidebar_img_container.fadeOut('fast', function() {
+            $sidebar_img_container.fadeOut('fast', function () {
               $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
               $sidebar_img_container.fadeIn('fast');
             });
@@ -375,7 +353,7 @@ print_r($date);
           if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
             var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
 
-            $full_page_background.fadeOut('fast', function() {
+            $full_page_background.fadeOut('fast', function () {
               $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
               $full_page_background.fadeIn('fast');
             });
@@ -394,7 +372,7 @@ print_r($date);
           }
         });
 
-        $('.switch-sidebar-image input').change(function() {
+        $('.switch-sidebar-image input').change(function () {
           $full_page_background = $('.full-page-background');
 
           $input = $(this);
@@ -426,7 +404,7 @@ print_r($date);
           }
         });
 
-        $('.switch-sidebar-mini input').change(function() {
+        $('.switch-sidebar-mini input').change(function () {
           $body = $('body');
 
           $input = $(this);
@@ -441,7 +419,7 @@ print_r($date);
 
             $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
 
-            setTimeout(function() {
+            setTimeout(function () {
               $('body').addClass('sidebar-mini');
 
               md.misc.sidebar_mini_active = true;
@@ -449,12 +427,12 @@ print_r($date);
           }
 
           // we simulate the window Resize so the charts will get updated in realtime.
-          var simulateWindowResize = setInterval(function() {
+          var simulateWindowResize = setInterval(function () {
             window.dispatchEvent(new Event('resize'));
           }, 180);
 
           // we stop the simulation of Window Resize after the animations are completed
-          setTimeout(function() {
+          setTimeout(function () {
             clearInterval(simulateWindowResize);
           }, 1000);
 
