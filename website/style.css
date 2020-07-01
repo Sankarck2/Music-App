@@ -54,7 +54,7 @@ header{
 }
 .main{
     width:100%;
-    display:flex;
+    display:-webkit-inline-box;
     padding:10px;
     justify-content: space-between;
     flex-wrap: wrap;

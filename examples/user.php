@@ -25,39 +25,41 @@ $music1=$_POST['music'];
 $thumb1=$_POST['thumb'];
 
 
-  	  
-
+  	
 	$target_path = $_SERVER["CONTEXT_DOCUMENT_ROOT"]."/examples/uploads/thumbimg/";
 	$target_path1 = $_SERVER["CONTEXT_DOCUMENT_ROOT"]."/examples/uploads/music/";
 	
 
-$target_path = $target_path.basename($_FILES['audio_track']['name']);
+$target_path1 = $target_path1.basename($_FILES['audio_track']['name']);
 
-$target_path1 = $target_path1.basename($_FILES['thumbnail']['name']);
+$target_path = $target_path.basename($_FILES['thumbnail']['name']);
 
 $nmusic="";
 	$nthumb="";
 
+$targ1="examples/uploads/thumbimg/".basename($_FILES['thumbnail']['name']);
+$targ2="examples/uploads/music/".basename($_FILES['audio_track']['name']);
 
- $audio=move_uploaded_file($_FILES['audio_track']['tmp_name'], $target_path);
-   $img=move_uploaded_file($_FILES['thumbnail']['tmp_name'], $target_path1);
+
+ $audio=move_uploaded_file($_FILES['audio_track']['tmp_name'], $target_path1);
+   $img=move_uploaded_file($_FILES['thumbnail']['tmp_name'], $target_path);
 
 
-	    echo '<script>document.getElementById("thumb").value="'.$target_path1.'";</script>';
+	    echo '<script>document.getElementById("thumb").value="'.$img.'";</script>';
 	 
-  echo '<script>document.getElementById("music").value="'.$target_path.'";</script>';
+  echo '<script>document.getElementById("music").value="'.$audio.'";</script>';
 
     if($_POST['id']=="0"){
 	   
 	   
-$query ="INSERT INTO song_details(song_name, movie_name, artist_name,genre,date,thumb_img,audio) VALUES ( '". $sname."','".$mname."','".$aname."','". $genre."','".$date."','".$target_path."','".$target_path1."' )";
+$query ="INSERT INTO song_details(song_name, movie_name, artist_name,genre,date,thumb_img,audio) VALUES ( '". $sname."','".$mname."','".$aname."','". $genre."','".$date."','".$targ1."','".$targ2."' )";
         mysqli_query($db, $query);
 
    }else{
 	   
 
 	$query =" UPDATE song_details
-SET song_name = '". $sname."', movie_name= '". $mname."',artist_name = '". $aname."',genre = '". $genre."', date= '". $date."', thumb_img= '". (($_FILES['thumbnail']['name']!="")?$target_path1:$thumb1)."', audio= '".(($_FILES['audio_track']['name']!="")?$target_path:$music1)."'
+SET song_name = '". $sname."', movie_name= '". $mname."',artist_name = '". $aname."',genre = '". $genre."', date= '". $date."', thumb_img= '". (($_FILES['thumbnail']['name']!="")?$targ1:$thumb1)."', audio= '".(($_FILES['audio_track']['name']!="")?$targ2:$music1)."'
 WHERE id = '". $_POST['id']."'";
 	      mysqli_query($db, $query);
 		  

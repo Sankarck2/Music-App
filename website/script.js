@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded',()=>{
         div.className = "alphabet"
         div.innerHTML = item;
         div.onclick = function() {
+		
+		window.location.href=`index.php?data=alpha&id=${item}`
             console.log(selectedMovieLetter)
             selectedMovieLetter.innerHTML = `Tamil ${item} Movie Collection`
         };
