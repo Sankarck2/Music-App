@@ -14,10 +14,30 @@ The above copyright notice and this permission notice shall be included in all c
 <?php
 require_once "config/config.php";
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 if(isset($_POST['sub'])){
 
 $sname=$_POST['song_name'];
 $aname=$_POST['artist_name'];
+$singername=$_POST['singer_name'];
+$actorname=$_POST['actor_name'];
 $mname=$_POST['movie_name'];
 $genre=$_POST['genre'];
 $date=$_POST['date'];
@@ -52,14 +72,14 @@ $targ2="examples/uploads/music/".basename($_FILES['audio_track']['name']);
     if($_POST['id']=="0"){
 	   
 	   
-$query ="INSERT INTO song_details(song_name, movie_name, artist_name,genre,date,thumb_img,audio) VALUES ( '". $sname."','".$mname."','".$aname."','". $genre."','".$date."','".$targ1."','".$targ2."' )";
+$query ="INSERT INTO song_details(song_name, movie_name,singer,actor_name, artist_name,genre,date,thumb_img,audio) VALUES ( '". $sname."','".$mname."','".$singername."','".$actorname."','".$aname."','". $genre."','".$date."','".$targ1."','".$targ2."' )";
         mysqli_query($db, $query);
 
    }else{
 	   
 
 	$query =" UPDATE song_details
-SET song_name = '". $sname."', movie_name= '". $mname."',artist_name = '". $aname."',genre = '". $genre."', date= '". $date."', thumb_img= '". (($_FILES['thumbnail']['name']!="")?$targ1:$thumb1)."', audio= '".(($_FILES['audio_track']['name']!="")?$targ2:$music1)."'
+SET song_name = '". $sname."', movie_name= '". $mname."', singer= '". $singername."', actor_name= '". $actorname."',artist_name = '". $aname."',genre = '". $genre."', date= '". $date."', thumb_img= '". (($_FILES['thumbnail']['name']!="")?$targ1:$thumb1)."', audio= '".(($_FILES['audio_track']['name']!="")?$targ2:$music1)."'
 WHERE id = '". $_POST['id']."'";
 	      mysqli_query($db, $query);
 		  
@@ -98,6 +118,49 @@ $result = $db->query($sql);
 
 $coursedata = $result->fetch_assoc();
 
+
+
+
+
+}
+
+$result = mysqli_query($db,"SELECT * FROM music_directors");
+
+
+
+
+$selectartist = '<option value="">--Select--</option>';
+
+//echo $coursedata->event_id; die;
+while($row = mysqli_fetch_array($result)){
+$selecteartist = ($coursedata['artist_name'] == $row['id']) ? 'selected="selected"' : '';	
+	$selectartist .= '<option value="'. $row['id'].'" '.$selecteartist.'>'.$row['name'].'</option>';
+}
+
+$result1 = mysqli_query($db,"SELECT * FROM actor");
+
+
+
+
+$selectactor = '<option value="">--Select--</option>';
+
+//echo $coursedata->event_id; die;
+while($row1= mysqli_fetch_array($result1)){
+$selecteactor = ($coursedata['actor_name'] == $row1['id']) ? 'selected="selected"' : '';	
+	$selectactor .= '<option value="'. $row1['id'].'" '.$selecteactor.'>'.$row1['name'].'</option>';
+}
+
+$result2 = mysqli_query($db,"SELECT * FROM singer");
+
+
+
+
+$selectsinger = '<option value="">--Select--</option>';
+
+//echo $coursedata->event_id; die;
+while($row2 = mysqli_fetch_array($result2)){
+$selectesinger = ($coursedata['singer'] == $row2['id']) ? 'selected="selected"' : '';	
+	$selectsinger .= '<option value="'. $row2['id'].'" '.$selectesinger.'>'.$row2['name'].'</option>';
 }
 
 ?>
@@ -138,22 +201,9 @@ $coursedata = $result->fetch_assoc();
           Creative Tim
         </a></div>
       <div class="sidebar-wrapper">
-        <ul class="nav">
-          <li class="nav-item  ">
-            <a class="nav-link" href="./dashboard.php">
-              <i class="material-icons">dashboard</i>
-              <p>Dashboard</p>
-            </a>
-          </li>
-          <li class="nav-item active ">
-            <a class="nav-link" href="./user.php">
-              <i class="material-icons">person</i>
-              <p>User Profile</p>
-            </a>
-          </li>
-         
-          
-        </ul>
+           <?php
+require_once "sidemenu.php";
+?>
       </div>
     </div>
     <div class="main-panel">
@@ -240,14 +290,9 @@ $coursedata = $result->fetch_assoc();
                             </div>
                         </div>
 						
-                        <div class="form-row">
-                            <div class="name">Artist Name</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <input class="input--style-5" type="text"  name="artist_name" value="<?php echo (isset($coursedata['artist_name'])) ? $coursedata['artist_name'] : '';?>">
-                                </div>
-                            </div>
-                        </div>
+                 
+						
+					
                         <div class="form-row">
                             <div class="name">Movie Name</div>
                             <div class="value">
@@ -256,6 +301,45 @@ $coursedata = $result->fetch_assoc();
                                 </div>
                             </div>
                         </div>
+							  <div class="form-row">
+                              <div class="name">Artist Name</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <div class="rs-select2 js-select-simple select--no-search">
+                                          <select name="artist_name" id="artist_name" >
+	                              <?php  echo $selectartist;?>
+	                                    </select>	
+                                        <div class="select-dropdown"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+							  <div class="form-row">
+                              <div class="name">Actor Name</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <div class="rs-select2 js-select-simple select--no-search">
+                                          <select name="actor_name" id="actor_name" >
+	                              <?php  echo $selectactor;?>
+	                                    </select>	
+                                        <div class="select-dropdown"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+							  <div class="form-row">
+                              <div class="name">Singer Name</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <div class="rs-select2 js-select-simple select--no-search">
+                                          <select class="input--style-5" name="singer_name" id="singer_name" >
+	                              <?php  echo $selectsinger;?>
+	                                    </select>	
+                                        <div class="select-dropdown"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
                         <div class="form-row">
                             <div class="name">Genre</div>
                             <div class="value">
@@ -264,22 +348,9 @@ $coursedata = $result->fetch_assoc();
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="form-row">
-                            <div class="name">Subject</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <div class="rs-select2 js-select-simple select--no-search">
-                                        <select name="subject">
-                                            <option disabled="disabled" selected="selected">Choose option</option>
-                                            <option>Melody</option>
-                                            <option>Folk</option>
-                                            <option>Theme </option>
-                                        </select>
-                                        <div class="select-dropdown"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
+						
+	
+                    
 
                         <div class="form-row m-b-55">
                             <div class="name">Thumbnail</div>

@@ -128,8 +128,9 @@ require_once "sidemenu.php";
           <div class="row">
 
             <div class="col-md-12">
-              <button type="button" class="btn btn-primary pull-right registerBtn" onclick="window.location.href='./user.php?id=0'">Register</button>
-
+		
+              <button type="button" class="btn btn-primary pull-right registerBtn" onclick="window.location.href='./actor.php?id=0'">Add ACtor</button>
+	 <button type="button" class="btn btn-primary pull-right registerBtn" onclick="window.location.href='./listactor.php'">Back</button>
               <div class="card">
                 <div class="card-header card-header-primary">
                   <h4 class="card-title ">Song List</h4>
@@ -146,7 +147,7 @@ require_once "config/config.php";
 
 
 
-$sql = "DELETE FROM song_details where id=".$_REQUEST['id'];
+$sql = "DELETE FROM actor where id=".$_REQUEST['id'];
 $result = $db->query($sql);
 
 
@@ -155,23 +156,19 @@ $result = $db->query($sql);
 
 }
 
-$result = mysqli_query($db,"SELECT * FROM song_details ");
+$result = mysqli_query($db,"SELECT * FROM actor");
 
 echo " <table class='table'>
                       <thead class=' text-primary'>
                         <th>
                          ID
                         </th>
+                       
                         <th>
-                         Song Name
+                            Actor  Name
                         </th>
-                        
-                        <th>
-                          Genre
-                        </th>
-                        <th>
-                          Movie name
-                        </th>
+                       
+                       
 						 <th>
                           Edit
                         </th>
@@ -185,12 +182,10 @@ while($row = mysqli_fetch_array($result))
 {
 echo "<tr>";
 echo "<td>" . $row['id'] . "</td>";
-echo "<td>" . $row['song_name'] . "</td>";
+echo "<td>" . $row['name'] . "</td>";
 
-echo "<td>" . $row['genre'] . "</td>";
-echo "<td>" . $row['movie_name'] . "</td>";
-echo "<td><a href='./user.php?id=".$row['id']."'>Edit</a></td>";
-echo "<td><a href='./dashboard.php?id=".$row['id']."&value=delete'>Delete</a></td>";
+echo "<td><a href='./actor.php?id=".$row['id']."'>Edit</a></td>";
+echo "<td><a href='./listactor.php?id=".$row['id']."&value=delete'>Delete</a></td>";
 
 echo "</tr>";
 }
