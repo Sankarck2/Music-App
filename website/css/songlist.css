@@ -3,9 +3,17 @@
     padding : 0;
     box-sizing: border-box;
 }
+.wrapper{
+    width:80%;
+    height: 200vh;
+    margin:auto;
+    border: 1px grey solid;
+    overflow: hidden;
+    position: relative;
+}
 
 header{
-    width: 100vw;
+    width: 80vw;
 }
 .header-image{
     width: 100%;
@@ -32,7 +40,6 @@ header{
 .alphabet{
     height: 37px;
     width: 45px;
-    /* border: groove; */
     margin: 0;
     padding: 2px;
     text-align: center;
@@ -52,13 +59,16 @@ header{
     margin-top: 15px;
     color:white
 }
+
+/* Main Content */
+
 .main{
     width:100%;
-    display:-webkit-inline-box;
-    padding:10px;
+    padding:30px 10px 10px 10px;
     justify-content: space-between;
     flex-wrap: wrap;
-
+    display: flex;
+    
 }
 
 .card{
@@ -88,4 +98,68 @@ header{
 
 .card h4{
    margin-top:7px
+}
+
+/* Home Page */
+
+.tab1{
+    display:flex;
+    width : 65%;
+    border: 1px gray solid ;
+    height: 48rem;
+}
+.tab2{
+
+    max-height:80rem;
+    width:30%;
+    display: flex;
+    flex-direction: column;
+    justify-content:start;
+}
+.hits{
+    height: 11rem;
+    border: 1px gray solid ;
+    padding-top:5px;
+    margin-top:5px
+}
+
+.Relatedmovies{
+    width: 100%;
+    height: 24rem;
+    border: 1px gray solid ;
+    
+}
+
+.moviecard{
+    display: flex;
+    border: 1px gray solid;
+    height: 63px;
+    width: 13rem;
+    padding: 2px;
+    margin:3px
+}
+
+.moviecard img{
+    height: 57px;
+    width: 4rem;
+    border-radius: 5%;
+}
+
+.tab3{
+    padding-left: 8px;
+}
+
+.tab3 p{
+    margin:0
+}
+
+footer{
+    border: groove;
+    bottom: 0%;
+    position: absolute;
+    height: 50px;
+    text-align: center;
+    margin-bottom: 0px;
+    left: 0%;
+    width: 100%;
 }

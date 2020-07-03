@@ -22,8 +22,8 @@ require_once "config/config.php";
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     
-    <link rel="stylesheet" href="css/style.css"/>
-    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="css/home.css"/>
+    <script type="text/javascript" src="home.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -69,150 +69,152 @@ require_once "config/config.php";
         </div>
     </header>
     <section class="main">
-    <?php
+      <div class="song-section">
+      <?php
 	 if($_REQUEST['data']=="2020"){
 		
 		$result = mysqli_query($db,"SELECT * FROM song_details where date like '%2020%'" );
 
-while($row = mysqli_fetch_array($result))
-{
-	
-	
-echo "<div class='card'>";
+      while($row = mysqli_fetch_array($result))
+      {
+      echo "<div class='card'>";
 
-echo " <img src=../". $row['thumb_img'] ."  height='150px' width='180px'>";
-echo "<h4>" . $row['song_name'] . "</h4>";
-echo "<p>". $row['movie_name'] ."</p>";
-echo " </div>";
+      echo " <img src=../". $row['thumb_img'] ."  height='150px' width='180px'>";
+      echo "<h4>" . $row['song_name'] . "</h4>";
+      echo "<p>". $row['movie_name'] ."</p>";
+      echo " </div>";
+      }
+      mysqli_close($con);
+        }
+        else if($_REQUEST['data']=="alpha"){
+          $result = mysqli_query($db,"SELECT * FROM song_details where movie_name like '".$_REQUEST['id']."%'");
 
+      while($row = mysqli_fetch_array($result))
+      {
+        
+        
+      echo "<div class='card'>";
 
-}
-
-
-mysqli_close($con);
-		
-	}
-	else if($_REQUEST['data']=="alpha"){
-		
-		$result = mysqli_query($db,"SELECT * FROM song_details where movie_name like '".$_REQUEST['id']."%'");
-
-while($row = mysqli_fetch_array($result))
-{
-	
-	
-echo "<div class='card'>";
-
-echo " <img src=../". $row['thumb_img'] ."  height='150px' width='180px'>";
-echo "<h4>" . $row['song_name'] . "</h4>";
-echo "<p>". $row['movie_name'] ."</p>";
-echo " </div>";
+      echo " <img src=../". $row['thumb_img'] ."  height='150px' width='180px'>";
+      echo "<h4>" . $row['song_name'] . "</h4>";
+      echo "<p>". $row['movie_name'] ."</p>";
+      echo " </div>";
 
 
-}
+      }
 
 
-mysqli_close($con);
-		
-	}
-	
-	else if($_REQUEST['data']=="search"){
-		
-		$result = mysqli_query($db,"SELECT * FROM song_details where movie_name like '%".$_POST['search']."%'");
+      mysqli_close($con);
+          
+        }
+        
+        else if($_REQUEST['data']=="search"){
+          
+          $result = mysqli_query($db,"SELECT * FROM song_details where movie_name like '%".$_POST['search']."%'");
 
-while($row = mysqli_fetch_array($result))
-{
-	
-	
-echo "<div class='card'>";
+      while($row = mysqli_fetch_array($result))
+      {
+        
+        
+      echo "<div class='card'>";
 
-echo " <img src=../". $row['thumb_img'] ."  height='150px' width='180px'>";
-echo "<h4>" . $row['song_name'] . "</h4>";
-echo "<p>". $row['movie_name'] ."</p>";
-echo " </div>";
-
-
-}
+      echo " <img src=../". $row['thumb_img'] ."  height='150px' width='180px'>";
+      echo "<h4>" . $row['song_name'] . "</h4>";
+      echo "<p>". $row['movie_name'] ."</p>";
+      echo " </div>";
 
 
-mysqli_close($con);
-		
-	}
-	
-	else if($_REQUEST['data']=="umovies"){
-		
-		$result = mysqli_query($db,"SELECT * FROM song_details ORDER BY date desc" );
-
-while($row = mysqli_fetch_array($result))
-{
-	
-	
-echo "<div class='card'>";
-
-echo " <img src=../". $row['thumb_img'] ."  height='150px' width='180px'>";
-echo "<h4>" . $row['song_name'] . "</h4>";
-echo "<p>". $row['movie_name'] ."</p>";
-echo " </div>";
+      }
 
 
-}
+      mysqli_close($con);
+          
+        }
+        
+        else if($_REQUEST['data']=="umovies"){
+          
+          $result = mysqli_query($db,"SELECT * FROM song_details ORDER BY date desc" );
+
+      while($row = mysqli_fetch_array($result))
+      {
+        
+        
+      echo "<div class='card'>";
+
+      echo " <img src=../". $row['thumb_img'] ."  height='150px' width='180px'>";
+      echo "<h4>" . $row['song_name'] . "</h4>";
+      echo "<p>". $row['movie_name'] ."</p>";
+      echo " </div>";
 
 
-mysqli_close($con);
-		
-	}
-	else if($_REQUEST['data']=="recent"){
-		
-		$result = mysqli_query($db,"SELECT * FROM song_details order by id desc" );
+      }
+      mysqli_close($con);
+        }
+        else if($_REQUEST['data']=="recent"){
+          
+          $result = mysqli_query($db,"SELECT * FROM song_details order by id desc" );
 
-while($row = mysqli_fetch_array($result))
-{
-	
-	
-echo "<div class='card'>";
+      while($row = mysqli_fetch_array($result))
+      {
+        
+        
+      echo "<div class='card'>";
 
-echo " <img src=../". $row['thumb_img'] ."  height='150px' width='180px'>";
-echo "<h4>" . $row['song_name'] . "</h4>";
-echo "<p>". $row['movie_name'] ."</p>";
-echo " </div>";
-
-
-}
+      echo " <img src=../". $row['thumb_img'] ."  height='150px' width='180px'>";
+      echo "<h4>" . $row['song_name'] . "</h4>";
+      echo "<p>". $row['movie_name'] ."</p>";
+      echo " </div>";
 
 
-mysqli_close($con);
-		
-	}
-	
-	else{
-		
-$result = mysqli_query($db,"SELECT * FROM song_details ORDER BY date desc" );
-
-while($row = mysqli_fetch_array($result))
-{
-	
-	
-echo "<div class='card'>";
-
-echo " <img src=../". $row['thumb_img'] ."  height='150px' width='180px'>";
-echo "<h4>" . $row['song_name'] . "</h4>";
-echo "<p>". $row['movie_name'] ."</p>";
-echo " </div>";
+      }
 
 
-}
+      mysqli_close($con);
+          
+        }
+        
+        else{
+          
+      $result = mysqli_query($db,"SELECT * FROM song_details ORDER BY date desc" );
+
+      while($row = mysqli_fetch_array($result))
+      {
+        
+        
+      echo "<div class='card'>";
+
+      echo " <img src=../". $row['thumb_img'] ."  height='150px' width='180px'>";
+      echo "<h4>" . $row['song_name'] . "</h4>";
+      echo "<p>". $row['movie_name'] ."</p>";
+      echo " </div>";
 
 
-mysqli_close($con);
-		
-	}
-	?>
+      }
+
+
+      mysqli_close($con);
+          
+        }
+        ?>
     <!-- </div><div class="card">
       <img src="./assets/img/sample.jpg" alt="" height='150px' width='180px'>
       <h4>fsadfs</h4>
       <p>sdfsf</p>
     </div> -->
-       
-    </section>
     </div>
+        <div class="hitlist">
+          <div class="hits">Tamil Yearly Hits</div>
+          <div class="hits">Music Director Hits</div>
+          <div class="hits">Tamil Actors Hits</div>
+          <div class="hits">Tamil Singers Hits</div>
+          <div class="hits">Special Collection</div>
+        </div>
+      
+    </section>
+        <footer class="footer">
+          All Rights Reserved
+          </footer>
+    </div>
+        
 </body>
 </html>

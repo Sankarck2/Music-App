@@ -22,8 +22,8 @@ require_once "config/config.php";
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     
-    <link rel="stylesheet" href="css/style.css"/>
-    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="css/songlist.css"/>
+    <script type="text/javascript" src="songlist.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -64,155 +64,58 @@ require_once "config/config.php";
         </div>
         <div class="container alphabet-list">
         </div>
-        <div class="showSelected">
-            
-        </div>
     </header>
     <section class="main">
-    <?php
-	 if($_REQUEST['data']=="2020"){
-		
-		$result = mysqli_query($db,"SELECT * FROM song_details where date like '%2020%'" );
-
-while($row = mysqli_fetch_array($result))
-{
-	
-	
-echo "<div class='card'>";
-
-echo " <img src=../". $row['thumb_img'] ."  height='150px' width='180px'>";
-echo "<h4>" . $row['song_name'] . "</h4>";
-echo "<p>". $row['movie_name'] ."</p>";
-echo " </div>";
-
-
-}
-
-
-mysqli_close($con);
-		
-	}
-	else if($_REQUEST['data']=="alpha"){
-		
-		$result = mysqli_query($db,"SELECT * FROM song_details where movie_name like '".$_REQUEST['id']."%'");
-
-while($row = mysqli_fetch_array($result))
-{
-	
-	
-echo "<div class='card'>";
-
-echo " <img src=../". $row['thumb_img'] ."  height='150px' width='180px'>";
-echo "<h4>" . $row['song_name'] . "</h4>";
-echo "<p>". $row['movie_name'] ."</p>";
-echo " </div>";
-
-
-}
-
-
-mysqli_close($con);
-		
-	}
-	
-	else if($_REQUEST['data']=="search"){
-		
-		$result = mysqli_query($db,"SELECT * FROM song_details where movie_name like '%".$_POST['search']."%'");
-
-while($row = mysqli_fetch_array($result))
-{
-	
-	
-echo "<div class='card'>";
-
-echo " <img src=../". $row['thumb_img'] ."  height='150px' width='180px'>";
-echo "<h4>" . $row['song_name'] . "</h4>";
-echo "<p>". $row['movie_name'] ."</p>";
-echo " </div>";
-
-
-}
-
-
-mysqli_close($con);
-		
-	}
-	
-	else if($_REQUEST['data']=="umovies"){
-		
-		$result = mysqli_query($db,"SELECT * FROM song_details ORDER BY date desc" );
-
-while($row = mysqli_fetch_array($result))
-{
-	
-	
-echo "<div class='card'>";
-
-echo " <img src=../". $row['thumb_img'] ."  height='150px' width='180px'>";
-echo "<h4>" . $row['song_name'] . "</h4>";
-echo "<p>". $row['movie_name'] ."</p>";
-echo " </div>";
-
-
-}
-
-
-mysqli_close($con);
-		
-	}
-	else if($_REQUEST['data']=="recent"){
-		
-		$result = mysqli_query($db,"SELECT * FROM song_details order by id desc" );
-
-while($row = mysqli_fetch_array($result))
-{
-	
-	
-echo "<div class='card'>";
-
-echo " <img src=../". $row['thumb_img'] ."  height='150px' width='180px'>";
-echo "<h4>" . $row['song_name'] . "</h4>";
-echo "<p>". $row['movie_name'] ."</p>";
-echo " </div>";
-
-
-}
-
-
-mysqli_close($con);
-		
-	}
-	
-	else{
-		
-$result = mysqli_query($db,"SELECT * FROM song_details ORDER BY date desc" );
-
-while($row = mysqli_fetch_array($result))
-{
-	
-	
-echo "<div class='card'>";
-
-echo " <img src=../". $row['thumb_img'] ."  height='150px' width='180px'>";
-echo "<h4>" . $row['song_name'] . "</h4>";
-echo "<p>". $row['movie_name'] ."</p>";
-echo " </div>";
-
-
-}
-
-
-mysqli_close($con);
-		
-	}
-	?>
-    <!-- </div><div class="card">
-      <img src="./assets/img/sample.jpg" alt="" height='150px' width='180px'>
-      <h4>fsadfs</h4>
-      <p>sdfsf</p>
-    </div> -->
-       
+      <div class="tab1">
+          <div class="completeDetails">
+            <h3>MOVIE NAME</h3>
+            <img src="./asset/img/sample.jpg" alt="" />
+            <div class="alldetails">
+                <p>starring0 : aaaa</p>
+                <p>starring1 : aaaa</p>
+                <p>starring2 : aaaa</p>
+                <p>starring3 : aaaa</p>
+                <p>starring4 : aaaa</p>
+                <p>starring5 : aaaa</p>
+                <p>starring6 : aaaa</p>
+            </div>
+          </div>
+          <div class="downloadDetails">
+              <div class="songDetails">
+                  <h4>Song Name</h4>
+                  <p>Artist :  artist name</p>
+                  <p>Duration :  5:00 min</p>
+                  <p>Lyrics :  David</p>
+              </div>
+              <div class="downloadbuttons">
+                  <button>Download 128kbs</button>
+                  <button>Download 320kbs</button>
+              </div>
+          </div>
+          <div class="disclaimer"></div>
+      </div>
+        <div class="tab2">
+          <div class="hits">Share on social media</div>
+          <div class="hits">Related Movies</div>
+          <div class="hits">Latest Movies</div>
+          <div class="hits">Top Albums</div>
+        </div>
+      
     </section>
+    <div class="Relatedmovies">
+        <h4>Related Movies</h4>
+        <div class="moviecard">
+                <img src="" alt="" height='10px' width='10px'>
+            <div class="tab3">
+                <p>Movie Name</p>
+                <p>Artist Name</p>
+            </div>
+        </div>  
     </div>
+        <footer class="footer">
+          All Rights Reserved
+          </footer>
+    </div>
+        
 </body>
 </html>
