@@ -16,14 +16,13 @@ require_once "config/config.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">    <link rel="stylesheet" href="css/songlist.css"/>
 
     <!-- JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    
-    <link rel="stylesheet" href="css/songlist.css"/>
-    <script type="text/javascript" src="songlist.js"></script>
+    <script type="text/javascript" src="js/songlist.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -67,25 +66,26 @@ require_once "config/config.php";
     </header>
     <section class="main">
       <div class="tab1">
+        <h4>MOVIE NAME</h4>
           <div class="completeDetails">
-            <h3>MOVIE NAME</h3>
             <img src="./asset/img/sample.jpg" alt="" />
             <div class="alldetails">
-                <p>starring0 : aaaa</p>
-                <p>starring1 : aaaa</p>
-                <p>starring2 : aaaa</p>
-                <p>starring3 : aaaa</p>
-                <p>starring4 : aaaa</p>
-                <p>starring5 : aaaa</p>
-                <p>starring6 : aaaa</p>
+              <table>
+                <tr><td><b>starring0</b> : aaaa</td></tr>            
+                <tr><td><b>starring0</b> : aaaa</td></tr>    
+                <tr><td><b>starring0</b> : aaaa</td></tr>            
+                <tr><td><b>starring0</b> : <a href="#">aaaa</a></td></tr> 
+                <tr><td><b>starring0</b> : aaaa</td></tr>            
+                <tr><td><b>starring0</b> : aaaa</td></tr> 
+              </table>
             </div>
           </div>
+          <h4>SONG NAME</h4>
           <div class="downloadDetails">
               <div class="songDetails">
-                  <h4>Song Name</h4>
-                  <p>Artist :  artist name</p>
-                  <p>Duration :  5:00 min</p>
-                  <p>Lyrics :  David</p>
+                  <p><i class="fa fa-music" aria-hidden="true"></i> Song Name :  David</p>
+                  <p><i class="fa fa-clock-o" aria-hidden="true"></i> Duration :  5:00 min</p>
+                  <p><i class="fa fa-microphone" aria-hidden="true"></i> Artist :  David</p>
               </div>
               <div class="downloadbuttons">
                   <button>Download 128kbs</button>
@@ -95,10 +95,10 @@ require_once "config/config.php";
           <div class="disclaimer"></div>
       </div>
         <div class="tab2">
-          <div class="hits">Share on social media</div>
-          <div class="hits">Related Movies</div>
-          <div class="hits">Latest Movies</div>
-          <div class="hits">Top Albums</div>
+          <div class="hits"><p>Share on social media</p></div>
+          <div class="hits"><p>Related Movies</p></div>
+          <div class="hits"><p>Latest Movies</p></div>
+          <div class="hits"><p>Top Albums</p></div>
         </div>
       
     </section>

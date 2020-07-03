@@ -10,6 +10,8 @@
     margin:auto;
     border: 1px red solid;
     overflow: hidden;
+    position: relative;
+
 }
 
 header{
@@ -30,11 +32,9 @@ header{
 
 .alphabet-list{
     border: groove;
-    height:41px;
     padding:0;
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
 .alphabet{
@@ -98,4 +98,24 @@ header{
 
 .card h4{
    margin-top:7px
+}
+
+footer{
+    border: groove;
+    bottom: 0%;
+    position: absolute;
+    height: 50px;
+    text-align: center;
+    margin-bottom: 0px;
+    left: 0%;
+    width: 100%;
+}
+
+
+@media screen and (max-width:910px){
+    .alphabet-list {
+        flex-wrap: wrap;
+        width: 80%;
+        margin: auto;
+    }
 }

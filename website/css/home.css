@@ -30,11 +30,9 @@ header{
 
 .alphabet-list{
     border: groove;
-    height:41px;
     padding:0;
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
 .alphabet{
@@ -132,4 +130,12 @@ footer{
     margin-bottom: 0px;
     left: 0%;
     width: 100%;
+}
+
+@media screen and (max-width:910px){
+    .alphabet-list {
+        flex-wrap: wrap;
+        width: 80%;
+        margin: auto;
+    }
 }

@@ -30,11 +30,9 @@ header{
 
 .alphabet-list{
     border: groove;
-    height:41px;
     padding:0;
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
 .alphabet{
@@ -104,12 +102,13 @@ header{
 
 .tab1{
     display:flex;
+    flex-direction: column;
     width : 65%;
     border: 1px gray solid ;
     height: 48rem;
+    margin-left: 0.5rem;
 }
 .tab2{
-
     max-height:80rem;
     width:30%;
     display: flex;
@@ -118,9 +117,8 @@ header{
 }
 .hits{
     height: 11rem;
-    border: 1px gray solid ;
-    padding-top:5px;
-    margin-top:5px
+    border: 1px gray solid;
+    
 }
 
 .Relatedmovies{
@@ -149,8 +147,74 @@ header{
     padding-left: 8px;
 }
 
+table{
+    line-height:2rem
+}
+
+.alldetails{
+    margin-left: 20px;
+    padding : 5px;
+}
+
+
+
+.tab1 h4{
+    padding: 5px;
+    background:#565d47;
+    color:#eeeeee;
+    text-align: center;
+}
+
+.tab2 p{
+    padding: 5px;
+    background:#565d47;
+    color:#eeeeee;
+    text-align: center;
+    text-transform: uppercase;
+}
+
 .tab3 p{
     margin:0
+}
+.completeDetails{
+    display: flex;
+    flex-wrap:wrap;
+   
+}
+.completeDetails img{
+    border: 1px solid #adadad;
+    border-radius: 3px;
+    height: 200px;
+    width: 200px;
+    margin:5px;
+}
+
+.downloadDetails{
+    display:flex;
+    border-bottom:1px solid #adadad;
+    flex-wrap:wrap;
+}
+
+.downloadbuttons{
+    margin:auto
+}
+
+.downloadbuttons button{
+    padding: 5px;
+    margin: 6px;
+    border:2px solid #383e56;
+    color: #383e56
+}
+
+.downloadbuttons button:hover{
+    background: #383e56;
+    color:white
+}
+
+.songDetails{
+    flex-grow: 5;
+    padding-left: 1rem;
+    line-height: 1rem;
 }
 
 footer{
@@ -163,3 +227,12 @@ footer{
     left: 0%;
     width: 100%;
 }
+
+@media screen and (max-width:910px){
+    .alphabet-list {
+        flex-wrap: wrap;
+        width: 80%;
+        margin: auto;
+    }
+}
+
