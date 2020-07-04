@@ -43,12 +43,14 @@ $genre=$_POST['genre'];
 $date=$_POST['date'];
 $music1=$_POST['music'];
 $thumb1=$_POST['thumb'];
-
+$music2=$_POST['music320'];
 
   	
 	$target_path = $_SERVER["CONTEXT_DOCUMENT_ROOT"]."/examples/uploads/thumbimg/";
 	$target_path1 = $_SERVER["CONTEXT_DOCUMENT_ROOT"]."/examples/uploads/music/";
+	$target_path2= $_SERVER["CONTEXT_DOCUMENT_ROOT"]."/examples/uploads/music320/";
 	
+	$target_path2 = $target_path2.basename($_FILES['audio_track320']['name']);
 
 $target_path1 = $target_path1.basename($_FILES['audio_track']['name']);
 
@@ -60,19 +62,21 @@ $nmusic="";
 $targ1="examples/uploads/thumbimg/".basename($_FILES['thumbnail']['name']);
 $targ2="examples/uploads/music/".basename($_FILES['audio_track']['name']);
 
-
+$targ3="examples/uploads/music320/".basename($_FILES['audio_track320']['name']);
  $audio=move_uploaded_file($_FILES['audio_track']['tmp_name'], $target_path1);
    $img=move_uploaded_file($_FILES['thumbnail']['tmp_name'], $target_path);
 
-
+$audio320=move_uploaded_file($_FILES['audio_track320']['tmp_name'], $target_path2);
 	    echo '<script>document.getElementById("thumb").value="'.$img.'";</script>';
 	 
   echo '<script>document.getElementById("music").value="'.$audio.'";</script>';
+  
+    echo '<script>document.getElementById("music320").value="'.$audio320.'";</script>';
 
     if($_POST['id']=="0"){
 	   
 	   
-$query ="INSERT INTO song_details(song_name, movie_name,singer,actor_name, artist_name,genre,date,thumb_img,audio) VALUES ( '". $sname."','".$mname."','".$singername."','".$actorname."','".$aname."','". $genre."','".$date."','".$targ1."','".$targ2."' )";
+$query ="INSERT INTO song_details(song_name, movie_name,singer,actor_name, artist_name,genre,date,thumb_img,audio,audio320) VALUES ( '". $sname."','".$mname."','".$singername."','".$actorname."','".$aname."','". $genre."','".$date."','".$targ1."','".$targ2."','".$targ3."' )";
         mysqli_query($db, $query);
 
    }else{
@@ -80,7 +84,7 @@ $query ="INSERT INTO song_details(song_name, movie_name,singer,actor_name, artis
 
 	$query =" UPDATE song_details
 SET song_name = '". $sname."', movie_name= '". $mname."', singer= '". $singername."', actor_name= '". $actorname."',artist_name = '". $aname."',genre = '". $genre."', date= '". $date."', thumb_img= '". (($_FILES['thumbnail']['name']!="")?$targ1:$thumb1)."', audio= '".(($_FILES['audio_track']['name']!="")?$targ2:$music1)."'
-WHERE id = '". $_POST['id']."'";
+, audio320= '".(($_FILES['audio_track320']['name']!="")?$targ3:$music2)."' WHERE id = '". $_POST['id']."'";
 	      mysqli_query($db, $query);
 		  
 		  
@@ -371,7 +375,7 @@ require_once "sidemenu.php";
 					
 				
                         <div class="form-row m-b-55">
-                            <div class="name">Audio Track</div>
+                            <div class="name">Audio Track 128kbps</div>
                             <div class="value">
                                 <div class="input-group">
                                         <div class="input-group-desc">
@@ -385,7 +389,25 @@ require_once "sidemenu.php";
 						
 							
 							   <input class='input--style-5' type='hidden' id='music' name='music' value='<?php echo (isset($coursedata['audio'])) ? $coursedata['audio'] : '';?>'>
-                             
+                       
+
+
+                        <div class="form-row m-b-55">
+                            <div class="name">Audio Track 320kbps</div>
+                            <div class="value">
+                                <div class="input-group">
+                                        <div class="input-group-desc">
+                                            <input class="input--style-5" accept="audio/mp3,audio/*;capture=microphone" type="file" name="audio_track320" >
+                                        </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
+					
+						
+							
+							   <input class='input--style-5' type='hidden' id='music320' name='music320' value='<?php echo (isset($coursedata['audio320'])) ? $coursedata['audio320'] : '';?>'>
+                					   
 					
                         <div class="form-row">
                             <div class="name">Date</div>

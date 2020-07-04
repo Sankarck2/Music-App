@@ -43,18 +43,18 @@ require_once "config/config.php";
                           <a class="nav-link" >Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="index.php?data=2020">Tamil 2020 Movies</a>
+                          <a class="nav-link" href="home.php?data=2020">Tamil 2020 Movies</a>
                         </li>
                       
                         <li class="nav-item">
-                          <a class="nav-link " href="index.php?data=umovies" tabindex="-1" aria-disabled="true">Upcoming Movies</a>
+                          <a class="nav-link " href="home.php?data=umovies" tabindex="-1" aria-disabled="true">Upcoming Movies</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link " href="index.php?data=recent" tabindex="-1" aria-disabled="true">Recent Updates</a>
+                            <a class="nav-link " href="home.php?data=recent" tabhome="-1" aria-disabled="true">Recent Updates</a>
                           </li>
                       </ul>
-                      <form class="form-inline my-2 my-lg-0" method="POST" action="index.php?data=search" >
+                      <form class="form-inline my-2 my-lg-0" method="POST" action="home.php?data=search" >
                         <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                       </form>
@@ -74,6 +74,22 @@ require_once "config/config.php";
 	 if($_REQUEST['data']=="2020"){
 		
 		$result = mysqli_query($db,"SELECT * FROM song_details where date like '%2020%'" );
+
+      while($row = mysqli_fetch_array($result))
+      {
+      echo "<div class='card'>";
+
+      echo " <img src=../". $row['thumb_img'] ."  height='150px' width='180px'>";
+      echo "<h4>" . $row['song_name'] . "</h4>";
+      echo "<p>". $row['movie_name'] ."</p>";
+      echo " </div>";
+      }
+      mysqli_close($con);
+        }
+		
+		 else if($_REQUEST['data']=="year"){
+		
+		$result = mysqli_query($db,"SELECT * FROM song_details where date like '%".$_REQUEST['id']."%'" );
 
       while($row = mysqli_fetch_array($result))
       {
@@ -203,11 +219,184 @@ require_once "config/config.php";
     </div> -->
     </div>
         <div class="hitlist">
-          <div class="hits">Tamil Yearly Hits</div>
-          <div class="hits">Music Director Hits</div>
-          <div class="hits">Tamil Actors Hits</div>
-          <div class="hits">Tamil Singers Hits</div>
-          <div class="hits">Special Collection</div>
+          <div class="hits">Tamil Yearly Hits
+		  
+		  <?php
+		      $result = mysqli_query($db,"SELECT * FROM year ORDER BY id desc" );
+
+     $row =mysqli_fetch_all($result, MYSQLI_ASSOC);
+	
+	      if(mysqli_num_rows($result)<6){
+			
+	 for($i=0;$i<mysqli_num_rows($result);$i++)
+      {
+		  
+   
+      echo "<a href='index.php?data=year&id=".$row[$i]['year']."'>Tamil". $row[$i]['year'] ."Movies</a></br>";
+ 
+	
+
+      }
+	   echo "<a href='index.php?data=myear'>More..</a>";
+		  }else{
+		  for($i=0;$i<=6;$i++)
+      {
+		  
+     
+       echo "<a href='index.php?data=year&id=".$row[$i]['year']."'>Tamil". $row[$i]['year'] ."Movies</a></br>";
+ 
+	
+
+      }
+		    echo "<a href='index.php?data=actor'>More..</a>";
+		  
+	  }
+		  
+		  ?>
+		
+		  
+		  </div>
+          <div class="hits">Music Director Hits</br>
+		    <?php
+		      $result1 = mysqli_query($db,"SELECT * FROM music_directors ORDER BY name desc" );
+
+     $row1 =mysqli_fetch_all($result1, MYSQLI_ASSOC);
+		
+	  
+	      if(mysqli_num_rows($result1)<6){
+	  for($j=0;$j<mysqli_num_rows($result1);$j++)
+      {
+		  
+     
+      echo "<a href='index.php?data=name&id=".$row1[$j]['name']."'>". $row1[$j]['name'] ."</a></br>";
+ 
+	
+
+      }
+	   echo "<a href='index.php?data=actor'>More..</a>";
+		  }else{
+		  for($j=0;$j<=6;$j++)
+      {
+		  
+     
+         echo "<a href='index.php?data=name&id=".$row1[$j]['name']."'>". $row1[$j]['name'] ."</a></br>";
+	
+
+      }
+		    echo "<a href='index.php?data=actor'>More..</a>";
+		  
+	  }
+		  
+		  ?>
+		
+		  
+		  </div>
+          <div class="hits">Tamil Actors Hits</br>
+		  
+		   <?php
+		      $result = mysqli_query($db,"SELECT * FROM actor ORDER BY id desc" );
+
+     $row =mysqli_fetch_all($result, MYSQLI_ASSOC);
+	
+	      if(mysqli_num_rows($result)<6){
+			
+	 for($i=0;$i<mysqli_num_rows($result1);$i++)
+      {
+		  
+   
+      echo "<a href='index.php?data=actor&id=".$row[$i]['name']."'>". $row[$i]['name'] ."</a></br>";
+ 
+	
+
+      }
+	   echo "<a href='index.php?data=nactor'>More..</a>";
+		  }else{
+		  for($i=0;$i<=6;$i++)
+      {
+		  
+     
+       echo "<a href='index.php?data=actor&id=".$row[$i]['name']."'>". $row[$i]['name'] ."</a></br>";
+ 
+	
+
+      }
+		    echo "<a href='index.php?data=nactor'>More..</a>";
+		  
+	  }
+		  
+		  ?>
+		
+		  </div>
+          <div class="hits">Tamil Singers Hits</br>
+		  
+		   <?php
+		      $result = mysqli_query($db,"SELECT * FROM singer ORDER BY id desc" );
+
+     $row =mysqli_fetch_all($result, MYSQLI_ASSOC);
+	
+	      if(mysqli_num_rows($result)<6){
+			
+	 for($i=0;$i<mysqli_num_rows($result);$i++)
+      {
+		  
+   
+      echo "<a href='index.php?data=singer&id=".$row[$i]['name']."'>". $row[$i]['name'] ."</a></br>";
+ 
+	
+
+      }
+	   echo "<a href='index.php?data=nsinger'>More..</a>";
+		  }else{
+		  for($i=0;$i<=6;$i++)
+      {
+		  
+     
+       echo "<a href='index.php?data=singer&id=".$row[$i]['name']."'>". $row[$i]['name'] ."</a></br>";
+ 
+	
+
+      }
+		    echo "<a href='index.php?data=nsinger'>More..</a>";
+		  
+	  }
+		  
+		  ?>
+		  </div>
+          <div class="hits">Special Collection</br>
+		   <?php
+		      $result = mysqli_query($db,"SELECT DISTINCT genre FROM song_details ORDER BY id desc" );
+
+     $row =mysqli_fetch_all($result, MYSQLI_ASSOC);
+	
+	      if(mysqli_num_rows($result)<6){
+			
+	 for($i=0;$i<count($row);$i++)
+      {
+		  
+   
+      echo "<a href='index.php?data=song&id=".$row[$i]['genre']."'>". $row[$i]['genre'] ."Songs</a></br>";
+ 
+	
+
+      }
+	   echo "<a href='index.php?data=nsong'>More..</a>";
+		  }else{
+		  for($i=0;$i<=6;$i++)
+      {
+		  
+     
+       echo "<a href='index.php?data=song&id=".$row[$i]['genre']."'>". $row[$i]['genre'] ."Songs</a></br>";
+ 
+	
+
+      }
+		    echo "<a href='index.php?data=nsong'>More..</a>";
+		  
+	  }
+		  
+		  ?>
+		  
+		  </div>
         </div>
       
     </section>

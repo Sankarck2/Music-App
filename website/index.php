@@ -93,6 +93,23 @@ echo " </div>";
 mysqli_close($con);
 		
 	}
+	else if($_REQUEST['data']=="year"){
+		
+		$result = mysqli_query($db,"SELECT * FROM song_details where date like '%".$_REQUEST['id']."%'" );
+
+
+
+      while($row = mysqli_fetch_array($result))
+      {
+      echo "<div class='card'>";
+
+      echo " <img src=../". $row['thumb_img'] ."  height='150px' width='180px'>";
+      echo "<h4>" . $row['song_name'] . "</h4>";
+      echo "<p>". $row['movie_name'] ."</p>";
+      echo " </div>";
+      }
+      mysqli_close($con);
+        }
 	else if($_REQUEST['data']=="alpha"){
 		
 		$result = mysqli_query($db,"SELECT * FROM song_details where movie_name like '".$_REQUEST['id']."%'");
@@ -174,6 +191,50 @@ echo "<div class='card'>";
 echo " <img src=../". $row['thumb_img'] ."  height='150px' width='180px'>";
 echo "<h4>" . $row['song_name'] . "</h4>";
 echo "<p>". $row['movie_name'] ."</p>";
+echo " </div>";
+
+
+}
+
+
+mysqli_close($con);
+		
+	}else if($_REQUEST['data']=="myear"){
+		
+		$result = mysqli_query($db,"SELECT * FROM year order by year desc" );
+
+while($row = mysqli_fetch_array($result))
+{
+	
+	
+echo "<div class='card'>";
+
+echo " <img src=../". $row['img'] ."  height='150px' width='180px'>";
+echo "<h4 > <a href='index.php?data=year&id=".$row['year']."'>" . $row['year'] . "</a></h4>";
+
+echo " </div>";
+
+
+}
+
+
+mysqli_close($con);
+		
+	}
+	
+	else if($_REQUEST['data']=="actor"){
+		
+		$result = mysqli_query($db,"SELECT * FROM actor order by name desc" );
+
+while($row = mysqli_fetch_array($result))
+{
+	
+	
+echo "<div class='card'>";
+
+echo " <img src=../". $row['img'] ."  height='150px' width='180px'>";
+echo "<h4 > <a href='index.php?data=newactor&id=".$row['id']."'>" . $row['id'] . "</a></h4>";
+
 echo " </div>";
 
 
