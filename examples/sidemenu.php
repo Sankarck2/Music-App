@@ -18,19 +18,17 @@
               <p> Actor</p>
             </a>
           </li>
-		  <li class="nav-item item5 " onclick="myFunction()" >
+		  <li class="nav-item item5 " onclick="myFunction(sd)" >
             <a class="nav-link" href="./listsinger.php">
               <i class="material-icons">person</i>
               <p> Singer</p>
             </a>
           </li>
-          
+            <li class="nav-item item5 " onclick="myFunction(s)" >
+            <a class="nav-link" href="./listyear.php">
+              <i class="material-icons">person</i>
+              <p> Year</p>
+            </a>
+          </li>
         </ul>
 		
-		<script>
-				
-	function myFunction() {
-		alert()
-   
-}
-		</script>

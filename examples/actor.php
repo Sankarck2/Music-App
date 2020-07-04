@@ -35,7 +35,7 @@ $nmusic="";
 	$nthumb="";
 
 
-$targ1="examples/uploads/thumbimg/".basename($_FILES['thumbnail']['name']);
+$targ1="examples/uploads/actor/".basename($_FILES['thumbnail']['name']);
 
 
 

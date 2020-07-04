@@ -16,14 +16,14 @@ require_once "config/config.php";
 
 if(isset($_POST['sub'])){
 
-
-$aname=$_POST['artist_name'];
+$year=$_POST['year'];
+$aname=$_POST['singer_name'];
 
 $thumb1=$_POST['thumb'];
 
 
   	
-	$target_path = $_SERVER["CONTEXT_DOCUMENT_ROOT"]."/examples/uploads/artist/";
+	$target_path = $_SERVER["CONTEXT_DOCUMENT_ROOT"]."/examples/uploads/tamilyear/";
 
 	
 
@@ -34,8 +34,8 @@ $target_path = $target_path.basename($_FILES['thumbnail']['name']);
 $nmusic="";
 	$nthumb="";
 
-$targ1="examples/uploads/artist/".basename($_FILES['thumbnail']['name']);
 
+$targ1="examples/uploads/tamilyear/".basename($_FILES['thumbnail']['name']);
 
 
 
@@ -44,19 +44,18 @@ $targ1="examples/uploads/artist/".basename($_FILES['thumbnail']['name']);
 
 	    echo '<script>document.getElementById("thumb").value="'.$img.'";</script>';
 	 
- 
 
-    if($_POST['id']=="0"){
+if($_POST['id']=="0"){
 	   
 	   
-$query ="INSERT INTO music_directors(name, img) VALUES ( '".$aname."','".$targ1."')";
+$query ="INSERT INTO year(year, img) VALUES ( '".$year."','".$targ1."')";
         mysqli_query($db, $query);
 
    }else{
 	   
 
-	$query =" UPDATE music_directors
-SET name = '". $aname."', img= '". (($_FILES['thumbnail']['name']!="")?$targ1:$thumb1)."'
+	$query =" UPDATE year
+SET  year = '". $year."', img= '". (($_FILES['thumbnail']['name']!="")?$targ1:$thumb1)."'
 WHERE id = '". $_POST['id']."'";
 	      mysqli_query($db, $query);
 		  
@@ -65,7 +64,8 @@ WHERE id = '". $_POST['id']."'";
 	   
    }
    
-        header("location: listartist.php");
+   
+        header("location: listyear.php");
    
 
 
@@ -75,7 +75,7 @@ if($_REQUEST['value']=="delete"){
 
 
 
-$sql = "DELETE FROM music_directors where id=".$_REQUEST['id'];
+$sql = "DELETE FROM singer where id=".$_REQUEST['id'];
 $result = $db->query($sql);
 
 
@@ -88,7 +88,7 @@ if($_REQUEST['id']!="0"){
 
 
 
-$sql = "SELECT * FROM music_directors where id=".$_REQUEST['id'];
+$sql = "SELECT * FROM year where id=".$_REQUEST['id'];
 $result = $db->query($sql);
 
 
@@ -135,7 +135,7 @@ $coursedata = $result->fetch_assoc();
           Creative Tim
         </a></div>
       <div class="sidebar-wrapper">
-      <?php
+             <?php
 require_once "sidemenu.php";
 ?>
       </div>
@@ -211,21 +211,21 @@ require_once "sidemenu.php";
         <div class="wrapper wrapper--w790">
             <div class="card card-5">
                 <div class="card-heading">
-                    <h2 class="title"> Add Music Directors</h2>
+                    <h2 class="title">ADD Singer</h2>
                 </div>
                 <div class="card-body">
                     <form enctype="multipart/form-data" action="#" method="POST"  >
-                     
+                  
 						
                         <div class="form-row">
-                            <div class="name">Artist Name</div>
+                            <div class="name">Enter Year</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-5" type="text"  name="artist_name" value="<?php echo (isset($coursedata['name'])) ? $coursedata['name'] : '';?>">
+                                    <input class="input--style-5" type="text"  name="year" value="<?php echo (isset($coursedata['year'])) ? $coursedata['year'] : '';?>">
                                 </div>
                             </div>
                         </div>
-                     
+                    
                       
                         <!-- <div class="form-row">
                             <div class="name">Subject</div>
@@ -261,13 +261,12 @@ require_once "sidemenu.php";
 							    <input class='input--style-5' type='hidden' id='thumb' name='thumb'   value='<?php echo (isset($coursedata['img'])) ? $coursedata['img'] : '';?>'>
                              
 					
-					
+				
+                    
 						
 							
-							
-                             
-					
-                  
+						
+               
                       
                         <div>
 						     <input class="input--style-5" type="hidden" name="id" value="<?php echo (isset($_REQUEST['id'])) ?$_REQUEST['id'] : '';?>">
