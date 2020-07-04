@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         div.innerHTML = item;
         div.onclick = function() {  
 		    window.location.href=`index.php?data=alpha&id=${item}`
-            selectedMovieLetter.innerHTML = `Tamil ${item} Movie Collection`
+            selectedMovieLetter.innerText = `Tamil ${item} Movie Collection`
         };
         return div
     }

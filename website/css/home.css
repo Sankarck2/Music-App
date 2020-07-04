@@ -28,11 +28,18 @@ header{
     padding-right: 25px;
 }
 
+nav{
+    background-color:#004445;
+}
+
+
 .alphabet-list{
     border: groove;
     padding:0;
     display: flex;
     justify-content: flex-start;
+    width: 80%;
+    margin-top:8px
 }
 
 .alphabet{
@@ -65,7 +72,6 @@ header{
     width:100%;
     padding:10px;
     justify-content: space-between;
-    flex-wrap: wrap;
     height:152vh;
     display: flex;
 }
@@ -118,7 +124,8 @@ header{
     height: 13.5rem;
     border: 1px gray solid ;
     padding-top:5px;
-    margin-top:5px
+    margin-top:5px;
+    text-align: center;
 }
 
 footer{
@@ -138,4 +145,23 @@ footer{
         width: 80%;
         margin: auto;
     }
+
+    .main {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .song-section{
+        width: 100%;
+    }
+    .hitlist{
+        flex-direction: row;
+        width: auto;
+    }
+
+    .hits{
+        margin:5px;
+        padding:5px
+    }
+
+   
 }
