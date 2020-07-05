@@ -3,13 +3,14 @@
     padding : 0;
     box-sizing: border-box;
 }
-
+body {
+    background-image: linear-gradient(to right top, #051937, #00426f, #006f89, #009b74, #23c231);
+}
 
 .wrapper{
     width:80%;
-    height: 200vh;
+    min-height: 200vh;
     margin:auto;
-    border: 1px grey solid;
     overflow: hidden;
     position: relative;
     background: white;
@@ -22,7 +23,7 @@ header{
 .header-image{
     width: 100%;
     height:20vh;
-    background:url('../asset/img/Navimag.png');
+    background:linear-gradient(to top,rgba(0, 0, 0,0.4),transparent),url('../asset/img/Navimag.png');
     background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover;
@@ -31,14 +32,40 @@ header{
 #navbarSupportedContent ul li{
     padding-right: 25px;
 }
+nav{
+    background-color:#207561;
+    margin-right:8px;
+}
+
+.navbar-light .navbar-nav .nav-link{
+    color: gainsboro;
+}
+
+.btn-outline-success{
+    color: white;
+    border: 1px solid;
+    
+}
+
+.navbar-light .navbar-nav .nav-link:hover{
+    color: rgb(255, 255, 255);
+} 
+
+.navbar-light .navbar-nav .active > .nav-link{
+    color:white
+}
+
+/* Navbar */
+
 
 .alphabet-list{
-    border: groove;
+    border:1px solid #207561;
     padding:0;
     display: flex;
     justify-content: flex-start;
     width:80%;
-    margin-top:8px
+    background:#c5f0a4;
+    margin-top:10px
 }
 
 .alphabet{
@@ -50,8 +77,8 @@ header{
 }
 
 .alphabet:hover{
-    background:#f1d1d1;
-    color:#7d5a5a;
+    background:#589167;
+    color:rgb(233, 233, 233);
     cursor: pointer;
     transform: scale(1.2)
 }
@@ -71,12 +98,13 @@ header{
     padding:30px 10px 10px 10px;
     justify-content: space-between;
     display: flex;
+
     
 }
 
 .card{
     color: #525252;
-    margin: 2px 2px 2px 2px;
+    margin: 2px 10px 2px 2px;
     padding: 8px 2px 2px 2px;
     border: 1.5px solid #d8d8d8;
     opacity: 0.9;
@@ -94,7 +122,6 @@ header{
     box-shadow:         0px 7px 11px 0px rgba(50, 50, 50, 0.65);
 }
 .card img{
-    border : 1px solid;
     border-radius:8px
 }
 .card img:hover{
@@ -115,6 +142,10 @@ header{
     border: 1px gray solid ;
     height: 48rem;
     margin-left: 0.5rem;
+    -webkit-box-shadow: 0px 7px 11px 0px rgba(50, 50, 50, 0.65);
+    -moz-box-shadow:    0px 7px 11px 0px rgba(50, 50, 50, 0.65);
+    box-shadow:         0px 7px 11px 0px rgba(50, 50, 50, 0.65);
+
 }
 .tab2{
     max-height:80rem;
@@ -168,14 +199,14 @@ table{
 
 .tab1 h4{
     padding: 5px;
-    background:#565d47;
+    background:#1D6382;
     color:#eeeeee;
     text-align: center;
 }
 
 .tab2 p{
     padding: 5px;
-    background:#565d47;
+    background:#1D6382;
     color:#eeeeee;
     text-align: center;
     text-transform: uppercase;
@@ -210,12 +241,12 @@ table{
 .downloadbuttons button{
     padding: 5px;
     margin: 6px;
-    border:2px solid #383e56;
-    color: #383e56
+    border:2px solid #752631;
+    color: #752631
 }
 
 .downloadbuttons button:hover{
-    background: #383e56;
+    background: #C24859;
     color:white
 }
 
@@ -226,14 +257,19 @@ table{
 }
 
 footer{
-    border: groove;
     bottom: 0%;
     position: absolute;
     height: 50px;
     text-align: center;
-    margin-bottom: 0px;
     left: 0%;
     width: 100%;
+    background: black;
+    color: white;
+    border: none;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 @media screen and (max-width:910px){
@@ -241,10 +277,32 @@ footer{
         flex-wrap: wrap;
         width: 80%;
         margin: auto;
+        margin-top:8px
     }
     .main{
         display: flex;
+        flex-direction: column;
         flex-wrap: wrap;
     }
+    .tab1{
+        width:100%
+    }
+    .tab2{
+        padding:3px;
+        margin:8px 1px 1px 1px;
+        flex-direction:row;
+        width:auto;
+    }
+    .hits{
+        margin:2px 2px;
+        overflow-y: scroll;
+    }
+    .Relatedmovies{
+        width:100%;
+        margin:4px;
+        padding:2px
+    }
+
+    
 }
 
