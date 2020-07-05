@@ -152,7 +152,7 @@ $coursedata = $result->fetch_assoc();
     echo "  <p><i class='fa fa-music' aria-hidden='true'></i> Song Name : ".$row[$i]['song_name']."</p>";
 	
 	
-			$sql = "SELECT * FROM music_directors where id=".$row[$i]['artist_name'];
+			$sql = "SELECT * FROM music_directors where id='".$row[$i]['artist_name']."'";
 			
 		
 $result = $db->query($sql);
@@ -203,13 +203,25 @@ $coursedata1 = $result->fetch_assoc();
     </section>
     <div class="Relatedmovies">
         <h4>Related Movies</h4>
-        <div class="moviecard">
-                <img src="" alt="" height='10px' width='10px'>
-            <div class="tab3">
-                <p>Movie Name</p>
-                <p>Artist Name</p>
-            </div>
-        </div>  
+		
+		<?php
+		
+		
+		$result = mysqli_query($db,"SELECT * FROM song_details where date like '%2020%'" );
+
+      while($row = mysqli_fetch_array($result))
+      {
+      echo "<div class='moviecard'>";
+
+      echo " <img src=../". $row['thumb_img'] ."  height='10px' width='10px'>";
+      echo "<div class='tab3'><p>" . $row['song_name'] . "</p>";
+      echo "<p>". $row['movie_name'] ."</p>";
+      echo " </div> </div>  ";
+      }
+      mysqli_close($con);
+		?>
+		
+       
     </div>
         <footer class="footer">
           All Rights Reserved
