@@ -87,6 +87,8 @@ require_once "config/config.php";
       mysqli_close($con);
         }
 		
+	
+		
 		 else if($_REQUEST['data']=="year"){
 		
 		$result = mysqli_query($db,"SELECT * FROM song_details where date like '%".$_REQUEST['id']."%'" );
@@ -248,7 +250,7 @@ require_once "config/config.php";
 	
 
       }
-		    echo "<a href='index.php?data=actor'>More..</a>";
+		    echo "<a href='index.php?data=myear'>More..</a>";
 		  
 	  }
 		  
@@ -268,22 +270,22 @@ require_once "config/config.php";
       {
 		  
      
-      echo "<a href='index.php?data=name&id=".$row1[$j]['name']."'>". $row1[$j]['name'] ."</a></br>";
+      echo "<a href='index.php?data=artist&id=".$row1[$j]['id']."'>". $row1[$j]['name'] ."</a></br>";
  
 	
 
       }
-	   echo "<a href='index.php?data=actor'>More..</a>";
+	   echo "<a href='index.php?data=allartist'>More..</a>";
 		  }else{
 		  for($j=0;$j<=6;$j++)
       {
 		  
      
-         echo "<a href='index.php?data=name&id=".$row1[$j]['name']."'>". $row1[$j]['name'] ."</a></br>";
+         echo "<a href='index.php?data=artist&id=".$row1[$j]['id']."'>". $row1[$j]['name'] ."</a></br>";
 	
 
       }
-		    echo "<a href='index.php?data=actor'>More..</a>";
+		    echo "<a href='index.php?data=allartist'>More..</a>";
 		  
 	  }
 		  
@@ -304,7 +306,7 @@ require_once "config/config.php";
       {
 		  
    
-      echo "<a href='index.php?data=actor&id=".$row[$i]['name']."'>". $row[$i]['name'] ."</a></br>";
+      echo "<a href='index.php?data=actor&id=".$row[$i]['id']."'>". $row[$i]['name'] ."</a></br>";
  
 	
 
@@ -315,7 +317,7 @@ require_once "config/config.php";
       {
 		  
      
-       echo "<a href='index.php?data=actor&id=".$row[$i]['name']."'>". $row[$i]['name'] ."</a></br>";
+       echo "<a href='index.php?data=actor&id=".$row[$i]['id']."'>". $row[$i]['name'] ."</a></br>";
  
 	
 
@@ -340,7 +342,7 @@ require_once "config/config.php";
       {
 		  
    
-      echo "<a href='index.php?data=singer&id=".$row[$i]['name']."'>". $row[$i]['name'] ."</a></br>";
+      echo "<a href='index.php?data=singer&id=".$row[$i]['id']."'>". $row[$i]['name'] ."</a></br>";
  
 	
 
@@ -351,7 +353,7 @@ require_once "config/config.php";
       {
 		  
      
-       echo "<a href='index.php?data=singer&id=".$row[$i]['name']."'>". $row[$i]['name'] ."</a></br>";
+       echo "<a href='index.php?data=singer&id=".$row[$i]['id']."'>". $row[$i]['name'] ."</a></br>";
  
 	
 
@@ -374,7 +376,7 @@ require_once "config/config.php";
       {
 		  
    
-      echo "<a href='index.php?data=song&id=".$row[$i]['genre']."'>". $row[$i]['genre'] ."Songs</a></br>";
+      echo "<a href='index.php?data=song&id=".$row[$i]['id']."'>". $row[$i]['genre'] ."Songs</a></br>";
  
 	
 
@@ -385,7 +387,7 @@ require_once "config/config.php";
       {
 		  
      
-       echo "<a href='index.php?data=song&id=".$row[$i]['genre']."'>". $row[$i]['genre'] ."Songs</a></br>";
+       echo "<a href='index.php?data=song&id=".$row[$i]['id']."'>". $row[$i]['genre'] ."Songs</a></br>";
  
 	
 

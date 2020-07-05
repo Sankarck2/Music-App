@@ -220,11 +220,9 @@ echo " </div>";
 
 mysqli_close($con);
 		
-	}
-	
-	else if($_REQUEST['data']=="actor"){
+	}else if($_REQUEST['data']=="allartist"){
 		
-		$result = mysqli_query($db,"SELECT * FROM actor order by name desc" );
+		$result = mysqli_query($db,"SELECT * FROM music_directors order by id desc" );
 
 while($row = mysqli_fetch_array($result))
 {
@@ -233,7 +231,153 @@ while($row = mysqli_fetch_array($result))
 echo "<div class='card'>";
 
 echo " <img src=../". $row['img'] ."  height='150px' width='180px'>";
-echo "<h4 > <a href='index.php?data=newactor&id=".$row['id']."'>" . $row['id'] . "</a></h4>";
+echo "<h4 > <a href='index.php?data=artist&id=".$row['id']."'>" . $row['name'] . "</a></h4>";
+
+echo " </div>";
+
+
+}
+
+
+mysqli_close($con);
+		
+	}
+	else if($_REQUEST['data']=="artist"){
+		
+		echo "put dat div here";
+		
+		$result = mysqli_query($db,"SELECT * FROM music_directors where id=".$_REQUEST['id']." order by id desc" );
+
+while($row = mysqli_fetch_array($result))
+{
+	
+	
+echo "<div class='card'>";
+
+echo " <img src=../". $row['img'] ."  height='150px' width='180px'>";
+echo "<h4 > <a href='index.php?data=artist&id=".$row['id']."'>" . $row['name'] . "</a></h4>";
+
+echo " </div>";
+
+
+}
+
+
+mysqli_close($con);
+		
+	}
+	
+	else if($_REQUEST['data']=="actor"){
+		
+		echo "put dat div here";
+		
+		$result = mysqli_query($db,"SELECT * FROM actor where id=".$_REQUEST['id'] );
+
+while($row = mysqli_fetch_array($result))
+{
+	
+	
+echo "<div class='card'>";
+
+echo " <img src=../". $row['img'] ."  height='150px' width='180px'>";
+echo "<h4 > <a href='index.php?data=newactor&id=".$row['id']."'>" . $row['name'] . "</a></h4>";
+
+echo " </div>";
+
+
+}
+
+
+mysqli_close($con);
+		
+	}
+	else if($_REQUEST['data']=="singer"){
+		
+		echo "put dat div here";
+		
+		$result = mysqli_query($db,"SELECT * FROM singer where id=".$_REQUEST['id'] );
+
+while($row = mysqli_fetch_array($result))
+{
+	
+	
+echo "<div class='card'>";
+
+echo " <img src=../". $row['img'] ."  height='150px' width='180px'>";
+echo "<h4 > <a href='index.php?data=newsinger&id=".$row['id']."'>" . $row['name'] . "</a></h4>";
+
+echo " </div>";
+
+
+}
+
+
+mysqli_close($con);
+		
+	}
+	
+		else if($_REQUEST['data']=="nsinger"){
+		
+		echo "put dat div here";
+		
+		$result = mysqli_query($db,"SELECT * FROM singer " );
+
+while($row = mysqli_fetch_array($result))
+{
+	
+	
+echo "<div class='card'>";
+
+echo " <img src=../". $row['img'] ."  height='150px' width='180px'>";
+echo "<h4 > <a href='index.php?data=newsinger&id=".$row['id']."'>" . $row['name'] . "</a></h4>";
+
+echo " </div>";
+
+
+}
+
+
+mysqli_close($con);
+		
+	}
+		else if($_REQUEST['data']=="song"){
+		
+		echo "put dat div here";
+		
+		$result = mysqli_query($db,"SELECT * FROM song where id=".$_REQUEST['id'] );
+
+while($row = mysqli_fetch_array($result))
+{
+	
+	
+echo "<div class='card'>";
+
+echo " <img src=../". $row['img'] ."  height='150px' width='180px'>";
+echo "<h4 > <a href='index.php?data=newsinger&id=".$row['id']."'>" . $row['name'] . "</a></h4>";
+
+echo " </div>";
+
+
+}
+
+
+mysqli_close($con);
+		
+	}
+		else if($_REQUEST['data']=="nsong"){
+		
+		echo "put dat div here";
+		
+		$result = mysqli_query($db,"SELECT * FROM song " );
+
+while($row = mysqli_fetch_array($result))
+{
+	
+	
+echo "<div class='card'>";
+
+echo " <img src=../". $row['img'] ."  height='150px' width='180px'>";
+echo "<h4 > <a href='index.php?data=newsinger&id=".$row['id']."'>" . $row['name'] . "</a></h4>";
 
 echo " </div>";
 
