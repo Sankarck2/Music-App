@@ -67,7 +67,7 @@ else {
         <div class="header-container">
             <div class="header-image"></div>
             <div class="nav-bar">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <nav class="navbar navbar-expand-lg navbar-light ">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-icon"></span>
                     </button>
@@ -202,10 +202,24 @@ $coursedata1 = $result->fetch_assoc();
           <div class="disclaimer"></div>
       </div>
         <div class="tab2">
-          <div class="hits"><p>Share on social media</p></div>
-          <div class="hits"><p>Related Movies</p></div>
-          <div class="hits"><p>Latest Movies</p></div>
-          <div class="hits"><p>Top Albums</p></div>
+          <div class="hits">
+            <h4>Share on social media</h4>
+            <div>
+             
+              <p>
+                <i class="fa fa-whatsapp" aria-hidden="true"></i>
+              </p>
+              <p>
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+              </p>  
+              <p>
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+              </p>
+            </div>
+        </div>
+          <div class="hits"><h4>Related Movies</h4></div>
+          <div class="hits"><h4>Latest Movies</h4></div>
+          <div class="hits"><h4>Top Albums</h4></div>
         </div>
       
     </section>
