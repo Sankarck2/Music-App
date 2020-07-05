@@ -67,7 +67,7 @@ else {
         <div class="header-container">
             <div class="header-image"></div>
             <div class="nav-bar">
-                <nav class="navbar navbar-expand-lg navbar-light ">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-icon"></span>
                     </button>
@@ -202,53 +202,22 @@ $coursedata1 = $result->fetch_assoc();
           <div class="disclaimer"></div>
       </div>
         <div class="tab2">
-          <div class="hits">
-            <h4>Share on social media</h4>
-            <div>
-             
-              <p>
-                <i class="fa fa-whatsapp" aria-hidden="true"></i>
-              </p>
-              <p>
-                <i class="fa fa-facebook" aria-hidden="true"></i>
-              </p>  
-              <p>
-                <i class="fa fa-twitter" aria-hidden="true"></i>
-              </p>
-            </div>
-        </div>
-          <div class="hits"><h4>Related Movies</h4></div>
-          <div class="hits"><h4>Latest Movies</h4></div>
-          <div class="hits"><h4>Top Albums</h4></div>
+          <div class="hits"><p>Share on social media</p></div>
+          <div class="hits"><p>Related Movies</p></div>
+          <div class="hits"><p>Latest Movies</p></div>
+          <div class="hits"><p>Top Albums</p></div>
         </div>
       
     </section>
     <div class="Relatedmovies">
         <h4>Related Movies</h4>
-		
-		
-		<?php
-		
-		   $result = mysqli_query($db,"SELECT * FROM song_details where date like '%2020%'");
-
-      while($row = mysqli_fetch_array($result))
-      {
-        
-        
-      echo "<div class='moviecard'>";
-
-      echo " <img src=../". $row['thumb_img'] ."  height='10px' width='10px'>";
-      echo "<p>" . $row['song_name'] . "</p>";
-      echo "<p>". $row['movie_name'] ."</p>";
-      echo " </div>";
-
-
-      }
-
-
-      mysqli_close($con);
-		?>
-    
+        <div class="moviecard">
+                <img src="" alt="" height='10px' width='10px'>
+            <div class="tab3">
+                <p>Movie Name</p>
+                <p>Artist Name</p>
+            </div>
+        </div>  
     </div>
         <footer class="footer">
           All Rights Reserved
