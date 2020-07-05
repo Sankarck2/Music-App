@@ -1,0 +1,175 @@
+*{
+    margin : 0;
+    padding : 0;
+    box-sizing: border-box;
+}
+body {
+    background-image: linear-gradient(to right top, #051937, #00426f, #006f89, #009b74, #23c231);
+}
+
+.wrapper{
+    width:80%;
+    min-height: 200vh;
+    margin:auto;
+    overflow: hidden;
+    position: relative;
+    background: white;
+
+}
+
+header{
+    width: 80vw;
+    margin-bottom: 15px;
+}
+.header-image{
+    width: 100%;
+    height:20vh;
+    background:linear-gradient(to top,rgba(0, 0, 0,0.4),transparent),url('../asset/img/Navimag.png');
+    background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
+}
+
+#navbarSupportedContent ul li{
+    padding-right: 25px;
+}
+nav{
+    background-color:#207561;
+    margin-right:8px;
+}
+
+.navbar-light .navbar-nav .nav-link{
+    color: gainsboro;
+}
+
+.btn-outline-success{
+    color: white;
+    border: 1px solid;
+    
+}
+
+.navbar-light .navbar-nav .nav-link:hover{
+    color: rgb(255, 255, 255);
+} 
+
+.navbar-light .navbar-nav .active > .nav-link{
+    color:white
+}
+
+/* Navbar */
+
+
+.alphabet-list{
+    border:1px solid #207561;
+    padding:0;
+    display: flex;
+    justify-content: flex-start;
+    width:80%;
+    background:#c5f0a4;
+    margin-top:10px
+}
+
+.alphabet{
+    height: 37px;
+    width: 45px;
+    margin: 0;
+    padding: 2px;
+    text-align: center;
+}
+
+.alphabet:hover{
+    background:#589167;
+    color:rgb(233, 233, 233);
+    cursor: pointer;
+    transform: scale(1.2)
+}
+
+/* Main Content */
+
+.main{
+    width:95%;
+    padding:30px 10px 10px 10px;
+    justify-content: space-between;
+    margin-top:10px;
+    margin:auto;
+    -webkit-box-shadow: 1px 3px 13px 0px #000000; 
+    box-shadow: 1px 3px 13px 0px #000000;
+    min-height:60rem
+}
+
+/* Home Page */
+
+
+
+.songDetails{
+    flex-grow: 15;
+    padding-left: 6px;
+
+}
+
+.downloadDetails{
+    display:flex;
+    border-bottom:1px solid #adadad;
+    padding: 2px 4px 2px 4px
+
+    
+}
+
+.downloadDetails:hover{
+    border-bottom:1px solid black;
+
+}
+
+.downloadbuttons{
+    margin:auto;
+    flex-grow: 1;
+}
+
+.downloadbuttons button{
+    padding: 5px;
+    margin: 6px;
+    border:2px solid #752631;
+    color: #752631
+}
+
+.downloadbuttons button:hover{
+    background: #C24859;
+    color:white
+}
+
+
+
+footer{
+    bottom: 0%;
+    position: absolute;
+    height: 50px;
+    text-align: center;
+    left: 0%;
+    width: 100%;
+    background: black;
+    color: white;
+    border: none;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media screen and (max-width:910px){
+    .alphabet-list {
+        flex-wrap: wrap;
+        width: 80%;
+        margin: auto;
+        margin-top:8px
+    }
+    
+
+    .downloadDetails{
+        flex-wrap:wrap;
+        
+    }
+
+
+    
+}
+

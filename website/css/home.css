@@ -216,6 +216,8 @@ footer{
         width: 122px;
         overflow: hidden;
         border-radius: 0;
+        -webkit-box-shadow: -3px 3px 9px -4px #000000; 
+        box-shadow: -3px 3px 9px -4px #000000;
     }
     
     .card img{
@@ -246,6 +248,7 @@ footer{
         width: 6rem;
         font-size:smaller ;
         overflow-y: scroll;
+        width: 100%;
     }
 
 }

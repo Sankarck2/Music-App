@@ -2,7 +2,7 @@
 error_reporting(0);
 /* Database credentials. Assuming you are running MySQL
 server with default setting (user 'root' with no password) */
-define('DB_SERVER', 'localhost');
+define('DB_SERVER', 'localhost:3308');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
 define('DB_NAME', 'musicapp');
