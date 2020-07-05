@@ -11,37 +11,29 @@ if(isset($_POST['submit320'])){
 	
 	$url = $_POST['320']; 
   
+  
+  $file_url = $_POST['320']; 
+header('Content-Type: application/octet-stream');  
+header("Content-Transfer-Encoding: Binary");   
+header("Content-disposition: attachment; filename=\"" . basename($file_url) . "\"");   
+readfile($file_url);
+
 // Use basename() function to return the base name of file  
-$file_name = basename($url); 
+
    
 // Use file_get_contents() function to get the file 
 // from url and use file_put_contents() function to 
 // save the file by using base name 
-if(file_put_contents($file_name,file_get_contents($url))) { 
-    echo "File downloaded successfully"; 
-} 
-else { 
-    echo "File downloading failed."; 
-} 
+
 }
 if(isset($_POST['submit128'])){
 	
 	
-	$url = $_POST['128']; 
-  
-// Use basename() function to return the base name of file  
-$file_name = basename($url); 
-   
-// Use file_get_contents() function to get the file 
-// from url and use file_put_contents() function to 
-// save the file by using base name 
-if(file_put_contents( $file_name,file_get_contents($url))) { 
-    echo "File downloaded successfully"; 
-} 
-else { 
-    echo "File downloading failed."; 
-} 
-}
+	 $file_url = $_POST['128']; 
+header('Content-Type: application/octet-stream');  
+header("Content-Transfer-Encoding: Binary");   
+header("Content-disposition: attachment; filename=\"" . basename($file_url) . "\"");   
+readfile($file_url);
 
 
 ?>
@@ -120,7 +112,7 @@ $coursedata = $result->fetch_assoc();
 	}
 	
 	?>
-		  asdasd
+	
 	
         <h4>MOVIE NAME</h4>
           <div class="completeDetails">
