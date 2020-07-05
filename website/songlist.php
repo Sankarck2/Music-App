@@ -6,8 +6,42 @@
 			
 require_once "config/config.php";
 
-
-
+if(isset($_POST['submit320'])){
+	
+	
+	$url = $_POST['320']; 
+  
+// Use basename() function to return the base name of file  
+$file_name = basename($url); 
+   
+// Use file_get_contents() function to get the file 
+// from url and use file_put_contents() function to 
+// save the file by using base name 
+if(file_put_contents($file_name,file_get_contents($url))) { 
+    echo "File downloaded successfully"; 
+} 
+else { 
+    echo "File downloading failed."; 
+} 
+}
+if(isset($_POST['submit128'])){
+	
+	
+	$url = $_POST['128']; 
+  
+// Use basename() function to return the base name of file  
+$file_name = basename($url); 
+   
+// Use file_get_contents() function to get the file 
+// from url and use file_put_contents() function to 
+// save the file by using base name 
+if(file_put_contents( $file_name,file_get_contents($url))) { 
+    echo "File downloaded successfully"; 
+} 
+else { 
+    echo "File downloading failed."; 
+} 
+}
 
 
 ?>
@@ -68,31 +102,102 @@ require_once "config/config.php";
     </header>
     <section class="main">
       <div class="tab1">
+
+	   <?php
+
+	 if($_REQUEST['data']=="album"){
+		$sql = "SELECT s.*,si.name as singername,a.name as actorname,m.name as musicname FROM song_details s INNER JOIN  singer si on si.id=s.singer INNER JOIN actor a on a.id=s.actor_name INNER JOIN  music_directors  m on m.id=s.artist_name  where s.id=".$_REQUEST['id'];
+
+
+$result = $db->query($sql);
+
+
+
+$coursedata = $result->fetch_assoc();
+
+
+		
+	}
+	
+	?>
+		  asdasd
+	
         <h4>MOVIE NAME</h4>
           <div class="completeDetails">
-            <img src="./asset/img/sample.jpg" alt="" />
+		  <?php
+		   echo " <img src=../". $coursedata['thumb_img'] ." >";
+		  ?>
+        
             <div class="alldetails">
               <table>
-                <tr><td><b>starring0</b> : aaaa</td></tr>            
-                <tr><td><b>starring0</b> : aaaa</td></tr>    
-                <tr><td><b>starring0</b> : aaaa</td></tr>            
-                <tr><td><b>starring0</b> : <a href="#">aaaa</a></td></tr> 
-                <tr><td><b>starring0</b> : aaaa</td></tr>            
-                <tr><td><b>starring0</b> : aaaa</td></tr> 
+                <tr><td><b>Starring</b> : <?php echo $coursedata['starring']?></td></tr>            
+                <tr><td><b>Direction</b> :  <?php echo $coursedata['direction']?></td></tr>    
+                <tr><td><b>Production</b> :  <?php echo $coursedata['production']?></td></tr>            
+                <tr><td><b>Music Director</b> : <a href="#"> <?php echo $coursedata['musicname']?></a></td></tr> 
+                <tr><td><b>Release Year</b> :  <?php  echo date('Y',strtotime($coursedata['date']));?></td></tr>            
+            
+				    <tr><td><b>Bitrates</b> : 128kbps, 320kbps
+</td></tr> 
               </table>
             </div>
           </div>
           <h4>SONG NAME</h4>
           <div class="downloadDetails">
-              <div class="songDetails">
-                  <p><i class="fa fa-music" aria-hidden="true"></i> Song Name :  David</p>
-                  <p><i class="fa fa-clock-o" aria-hidden="true"></i> Duration :  5:00 min</p>
-                  <p><i class="fa fa-microphone" aria-hidden="true"></i> Artist :  David</p>
-              </div>
-              <div class="downloadbuttons">
-                  <button>Download 128kbs</button>
-                  <button>Download 320kbs</button>
-              </div>
+		  <?php
+		  
+		     $result = mysqli_query($db,"SELECT * FROM song_details where movie_name='".$coursedata['movie_name']."'" );
+
+     $row =mysqli_fetch_all($result, MYSQLI_ASSOC);
+	
+	 
+			
+	 for($i=0;$i<mysqli_num_rows($result);$i++)
+      {
+		
+   
+     echo " <div class='songDetails'>";
+   
+    echo "  <p><i class='fa fa-music' aria-hidden='true'></i> Song Name : ".$row[$i]['song_name']."</p>";
+	
+	
+			$sql = "SELECT * FROM music_directors where id=".$row[$i]['artist_name'];
+			
+		
+$result = $db->query($sql);
+
+
+
+$coursedata1 = $result->fetch_assoc();
+    
+	
+	   echo "  <p><i class='fa fa-microphon' aria-hidden='true'></i> Artist : ".$coursedata1['name']."</p>";
+  
+	  echo "  <p><i class='fa fa-clock-o' aria-hidden='true'></i> Duration : 3:00min</p>";
+
+   echo "</div>";
+   
+
+	
+	 echo "<form method='POST' action='#'>";
+	 echo "<input type='hidden' name='128' value='../".$row[$i]['audio']."'/>";
+	  echo "<button name='submit128'>Download 128kbs</button>";
+	echo "</form>";
+	 echo "<form method='POST' action='#'>";
+	 echo "<input type='hidden' name='320' value='..".$row[$i]['audio320']."'/>";
+	  echo "<button name='submit320'>Download 320kbs</button>";
+	echo "</form>";
+               
+               
+   
+      }
+	
+		  
+		  
+		  ?>
+		  
+		  
+            
+              
           </div>
           <div class="disclaimer"></div>
       </div>
@@ -106,13 +211,30 @@ require_once "config/config.php";
     </section>
     <div class="Relatedmovies">
         <h4>Related Movies</h4>
-        <div class="moviecard">
-                <img src="" alt="" height='10px' width='10px'>
-            <div class="tab3">
-                <p>Movie Name</p>
-                <p>Artist Name</p>
-            </div>
-        </div>  
+		
+		
+		<?php
+		
+		   $result = mysqli_query($db,"SELECT * FROM song_details where date like '%2020%'");
+
+      while($row = mysqli_fetch_array($result))
+      {
+        
+        
+      echo "<div class='moviecard'>";
+
+      echo " <img src=../". $row['thumb_img'] ."  height='10px' width='10px'>";
+      echo "<p>" . $row['song_name'] . "</p>";
+      echo "<p>". $row['movie_name'] ."</p>";
+      echo " </div>";
+
+
+      }
+
+
+      mysqli_close($con);
+		?>
+    
     </div>
         <footer class="footer">
           All Rights Reserved

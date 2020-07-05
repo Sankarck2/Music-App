@@ -395,13 +395,14 @@ $result = mysqli_query($db,"SELECT * FROM song_details ORDER BY date desc" );
 
 while($row = mysqli_fetch_array($result))
 {
-	
-	
-echo "<div class='card'>";
 
+echo "<div class='card'>";
+	
+echo " <a href='songlist.php?data=album&id=".$row['id']."'>";
 echo " <img src=../". $row['thumb_img'] ."  height='150px' width='180px'>";
 echo "<h4>" . $row['song_name'] . "</h4>";
 echo "<p>". $row['movie_name'] ."</p>";
+echo " </a>";
 echo " </div>";
 
 

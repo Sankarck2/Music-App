@@ -44,7 +44,9 @@ $date=$_POST['date'];
 $music1=$_POST['music'];
 $thumb1=$_POST['thumb'];
 $music2=$_POST['music320'];
-
+$pname=$_POST['production'];
+$starname=$_POST['starring'];
+$dname=$_POST['direction'];
   	
 	$target_path = $_SERVER["CONTEXT_DOCUMENT_ROOT"]."/examples/uploads/thumbimg/";
 	$target_path1 = $_SERVER["CONTEXT_DOCUMENT_ROOT"]."/examples/uploads/music/";
@@ -76,14 +78,14 @@ $audio320=move_uploaded_file($_FILES['audio_track320']['tmp_name'], $target_path
     if($_POST['id']=="0"){
 	   
 	   
-$query ="INSERT INTO song_details(song_name, movie_name,singer,actor_name, artist_name,genre,date,thumb_img,audio,audio320) VALUES ( '". $sname."','".$mname."','".$singername."','".$actorname."','".$aname."','". $genre."','".$date."','".$targ1."','".$targ2."','".$targ3."' )";
+$query ="INSERT INTO song_details(direction,starring,production,song_name, movie_name,singer,actor_name, artist_name,genre,date,thumb_img,audio,audio320) VALUES ( '". $dname."','".$starname."','".$pname."','". $sname."','".$mname."','".$singername."','".$actorname."','".$aname."','". $genre."','".$date."','".$targ1."','".$targ2."','".$targ3."' )";
         mysqli_query($db, $query);
 
    }else{
 	   
 
 	$query =" UPDATE song_details
-SET song_name = '". $sname."', movie_name= '". $mname."', singer= '". $singername."', actor_name= '". $actorname."',artist_name = '". $aname."',genre = '". $genre."', date= '". $date."', thumb_img= '". (($_FILES['thumbnail']['name']!="")?$targ1:$thumb1)."', audio= '".(($_FILES['audio_track']['name']!="")?$targ2:$music1)."'
+SET direction = '". $dname."',starring = '". $starname."',production = '". $pname."',song_name = '". $sname."', movie_name= '". $mname."', singer= '". $singername."', actor_name= '". $actorname."',artist_name = '". $aname."',genre = '". $genre."', date= '". $date."', thumb_img= '". (($_FILES['thumbnail']['name']!="")?$targ1:$thumb1)."', audio= '".(($_FILES['audio_track']['name']!="")?$targ2:$music1)."'
 , audio320= '".(($_FILES['audio_track320']['name']!="")?$targ3:$music2)."' WHERE id = '". $_POST['id']."'";
 	      mysqli_query($db, $query);
 		  
@@ -349,6 +351,30 @@ require_once "sidemenu.php";
                             <div class="value">
                                 <div class="input-group">
                                     <input class="input--style-5" type="text" name="genre" value="<?php echo (isset($coursedata['genre'])) ?$coursedata['genre']: '';?>">
+                                </div>
+                            </div>
+                        </div>
+						     <div class="form-row">
+                            <div class="name">Starring</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-5" type="text" name="starring" value="<?php echo (isset($coursedata['starring'])) ?$coursedata['starring']: '';?>">
+                                </div>
+                            </div>
+                        </div>
+						     <div class="form-row">
+                            <div class="name">Production</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-5" type="text" name="production" value="<?php echo (isset($coursedata['production'])) ?$coursedata['production']: '';?>">
+                                </div>
+                            </div>
+                        </div>
+						     <div class="form-row">
+                            <div class="name">Direction</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-5" type="text" name="direction" value="<?php echo (isset($coursedata['direction'])) ?$coursedata['direction']: '';?>">
                                 </div>
                             </div>
                         </div>
