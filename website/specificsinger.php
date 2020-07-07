@@ -7,6 +7,36 @@
 require_once "config/config.php";
 
 
+if(isset($_POST['submit320'])){
+	
+	
+	$url = $_POST['320']; 
+  
+  
+  $file_url = $_POST['320']; 
+header('Content-Type: application/octet-stream');  
+header("Content-Transfer-Encoding: Binary");   
+header("Content-disposition: attachment; filename=\"" . basename($file_url) . "\"");   
+readfile($file_url);
+
+// Use basename() function to return the base name of file  
+
+   
+// Use file_get_contents() function to get the file 
+// from url and use file_put_contents() function to 
+// save the file by using base name 
+
+}
+if(isset($_POST['submit128'])){
+	
+	
+	 $file_url = $_POST['128']; 
+header('Content-Type: application/octet-stream');  
+header("Content-Transfer-Encoding: Binary");   
+header("Content-disposition: attachment; filename=\"" . basename($file_url) . "\"");   
+readfile($file_url);
+
+}
 
 
 
@@ -67,40 +97,38 @@ require_once "config/config.php";
         </div>
     </header>
     <section class="main">
+     <?php
+	 $result = mysqli_query($db,"SELECT * FROM song_details where artist_name=".$_REQUEST['id']);
+
+
+
+      while($row = mysqli_fetch_array($result))
+      {
+      echo "<div class='downloadDetails'>";
+   echo "<div class='songDetails'>";
+   echo "  <p><i class='fa fa-music' aria-hidden='true'></i> Song Name : ".$row['song_name']."</p>";
+   echo "  <p><i class='fa fa-clock-o' aria-hidden='true'></i>  Duration :  5:00 min</p>";
+   echo "  <p><i class='fa fa-microphone' aria-hidden='true'></i> Movie Name : ".$row['move_name']."/p>";
      
-          <div class="downloadDetails">
-              <div class="songDetails">
-                  <p><i class="fa fa-music" aria-hidden="true"></i> Song Name :  David</p>
-                  <p><i class="fa fa-clock-o" aria-hidden="true"></i> Duration :  5:00 min</p>
-                  <p><i class="fa fa-microphone" aria-hidden="true"></i> Artist :  David</p>
-              </div>
-              <div class="downloadbuttons">
-                  <button>Download 128kbs</button>
-                  <button>Download 320kbs</button>
-              </div>
-          </div>
-          <div class="downloadDetails">
-              <div class="songDetails">
-                  <p><i class="fa fa-music" aria-hidden="true"></i> Song Name :  David</p>
-                  <p><i class="fa fa-clock-o" aria-hidden="true"></i> Duration :  5:00 min</p>
-                  <p><i class="fa fa-microphone" aria-hidden="true"></i> Artist :  David</p>
-              </div>
-              <div class="downloadbuttons">
-                  <button>Download 128kbs</button>
-                  <button>Download 320kbs</button>
-              </div>
-          </div>
-          <div class="downloadDetails">
-              <div class="songDetails">
-                  <p><i class="fa fa-music" aria-hidden="true"></i> Song Name :  David</p>
-                  <p><i class="fa fa-clock-o" aria-hidden="true"></i> Duration :  5:00 min</p>
-                  <p><i class="fa fa-microphone" aria-hidden="true"></i> Artist :  David</p>
-              </div>
-              <div class="downloadbuttons">
-                  <button>Download 128kbs</button>
-                  <button>Download 320kbs</button>
-              </div>
-          </div>
+      echo " </div>  <div class='downloadbuttons'> ";
+	  	 echo "<form method='POST' action='#'>";
+	 echo "<input type='hidden' name='128' value='../".$row['audio']."'/>";
+	  echo "<button name='submit128'>Download 128kbs</button>";
+	echo "</form>";
+	 echo "<form method='POST' action='#'>";
+	 echo "<input type='hidden' name='320' value='..".$row['audio320']."'/>";
+	  echo "<button name='submit320'>Download 320kbs</button>";
+	echo "</form>";
+               
+	  echo " </div>";
+	  
+      }
+      mysqli_close($con);
+	 
+	 
+	 ?>
+       
+    
     </section>
     
         <footer class="footer">

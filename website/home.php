@@ -270,7 +270,7 @@ require_once "config/config.php";
       {
 		  
      
-      echo "<a href='index.php?data=artist&id=".$row1[$j]['id']."'>". $row1[$j]['name'] ."</a></br>";
+      echo "<a href='specificsinger.php?data=artist&id=".$row1[$j]['id']."'>". $row1[$j]['name'] ."</a></br>";
  
 	
 
@@ -281,7 +281,7 @@ require_once "config/config.php";
       {
 		  
      
-         echo "<a href='index.php?data=artist&id=".$row1[$j]['id']."'>". $row1[$j]['name'] ."</a></br>";
+         echo "<a href='specificsinger.php?data=artist&id=".$row1[$j]['id']."'>". $row1[$j]['name'] ."</a></br>";
 	
 
       }
