@@ -105,21 +105,21 @@ readfile($file_url);
       while($row = mysqli_fetch_array($result))
       {
       echo "<div class='downloadDetails'>";
-   echo "<div class='songDetails'>";
-   echo "  <p><i class='fa fa-music' aria-hidden='true'></i> Song Name : ".$row['song_name']."</p>";
-   echo "  <p><i class='fa fa-clock-o' aria-hidden='true'></i>  Duration :  5:00 min</p>";
-   echo "  <p><i class='fa fa-microphone' aria-hidden='true'></i> Movie Name : ".$row['move_name']."/p>";
-     
-      echo " </div>  <div class='downloadbuttons'> ";
-	  	 echo "<form method='POST' action='#'>";
-	 echo "<input type='hidden' name='128' value='../".$row['audio']."'/>";
-	  echo "<button name='submit128'>Download 128kbs</button>";
-	echo "</form>";
-	 echo "<form method='POST' action='#'>";
-	 echo "<input type='hidden' name='320' value='..".$row['audio320']."'/>";
-	  echo "<button name='submit320'>Download 320kbs</button>";
-	echo "</form>";
-               
+        echo "<div class='songDetails'>";
+          echo "  <p><i class='fa fa-music' aria-hidden='true'></i> Song Name : ".$row['song_name']."</p>";
+          echo "  <p><i class='fa fa-clock-o' aria-hidden='true'></i>  Duration :  5:00 min</p>";
+          echo "  <p><i class='fa fa-microphone' aria-hidden='true'></i> Movie Name : ".$row['move_name']."</p>";
+        echo " </div>";
+        echo "<div class='downloadbuttons'> ";
+          echo "<form method='POST' action='#'>";
+            echo "<input type='hidden' name='128' value='../".$row['audio']."'/>";
+            echo "<button name='submit128'>Download 128kbs</button>";
+          echo "</form>";
+          echo "<form method='POST' action='#'>";
+            echo "<input type='hidden' name='320' value='..".$row['audio320']."'/>";
+            echo "<button name='submit320'>Download 320kbs</button>";
+          echo "</form>";
+        echo "</div>";      
 	  echo " </div>";
 	  
       }
