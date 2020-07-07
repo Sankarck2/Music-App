@@ -221,7 +221,7 @@ require_once "config/config.php";
     </div> -->
     </div>
         <div class="hitlist">
-          <div class="hits">Tamil Yearly Hits
+          <div class="hits"><h4>Tamil Yearly Hits</h4>
 		  
 		  <?php
 		      $result = mysqli_query($db,"SELECT * FROM year ORDER BY id desc" );
@@ -233,24 +233,27 @@ require_once "config/config.php";
 	 for($i=0;$i<mysqli_num_rows($result);$i++)
       {
 		  
-   
+        echo "<p>";
       echo "<a href='index.php?data=year&id=".$row[$i]['year']."'>Tamil". $row[$i]['year'] ."Movies</a></br>";
- 
+      echo "</p>";
+
 	
 
       }
-	   echo "<a href='index.php?data=myear'>More..</a>";
+	   echo "<a href='index.php?data=myear' id='more'>More..</a>";
 		  }else{
 		  for($i=0;$i<=6;$i++)
       {
 		  
-     
+        echo "<p>";
+
        echo "<a href='index.php?data=year&id=".$row[$i]['year']."'>Tamil". $row[$i]['year'] ."Movies</a></br>";
- 
+       echo "</p>";
+
 	
 
       }
-		    echo "<a href='index.php?data=myear'>More..</a>";
+		    echo "<a href='index.php?data=myear' id='more'>More..</a>";
 		  
 	  }
 		  
@@ -258,7 +261,7 @@ require_once "config/config.php";
 		
 		  
 		  </div>
-          <div class="hits">Music Director Hits</br>
+          <div class="hits"><h4>Music Director Hits</h4>
 		    <?php
 		      $result1 = mysqli_query($db,"SELECT * FROM music_directors ORDER BY name desc" );
 
@@ -269,23 +272,27 @@ require_once "config/config.php";
 	  for($j=0;$j<mysqli_num_rows($result1);$j++)
       {
 		  
-     
+        echo "<p>";
+
       echo "<a href='specificsinger.php?data=artist&id=".$row1[$j]['id']."'>". $row1[$j]['name'] ."</a></br>";
- 
+      echo "</p>";
+
 	
 
       }
-	   echo "<a href='index.php?data=allartist'>More..</a>";
+	   echo "<a href='index.php?data=allartist' id='more'>More..</a>";
 		  }else{
 		  for($j=0;$j<=6;$j++)
       {
 		  
-     
+        echo "<p>";
+
          echo "<a href='specificsinger.php?data=artist&id=".$row1[$j]['id']."'>". $row1[$j]['name'] ."</a></br>";
-	
+         echo "</p>";
+
 
       }
-		    echo "<a href='index.php?data=allartist'>More..</a>";
+		    echo "<a href='index.php?data=allartist' id='more'>More..</a>";
 		  
 	  }
 		  
@@ -293,7 +300,7 @@ require_once "config/config.php";
 		
 		  
 		  </div>
-          <div class="hits">Tamil Actors Hits</br>
+          <div class="hits"><h4>Tamil Actors Hits</h4>
 		  
 		   <?php
 		      $result = mysqli_query($db,"SELECT * FROM actor ORDER BY id desc" );
@@ -305,31 +312,35 @@ require_once "config/config.php";
 	 for($i=0;$i<mysqli_num_rows($result1);$i++)
       {
 		  
-   
+        echo "<p>";
+
       echo "<a href='index.php?data=actor&id=".$row[$i]['id']."'>". $row[$i]['name'] ."</a></br>";
- 
+      echo "</p>";
+
 	
 
       }
-	   echo "<a href='index.php?data=nactor'>More..</a>";
+	   echo "<a href='index.php?data=nactor' id='more'>More..</a>";
 		  }else{
 		  for($i=0;$i<=6;$i++)
       {
 		  
-     
+        echo "<p>";
+
        echo "<a href='index.php?data=actor&id=".$row[$i]['id']."'>". $row[$i]['name'] ."</a></br>";
  
-	
+       echo "</p>";
+
 
       }
-		    echo "<a href='index.php?data=nactor'>More..</a>";
+		    echo "<a href='index.php?data=nactor' id='more'>More..</a>";
 		  
 	  }
 		  
 		  ?>
 		
 		  </div>
-          <div class="hits">Tamil Singers Hits</br>
+      <div class="hits"><h4>Tamil Singers Hits</h4>
 		  
 		   <?php
 		      $result = mysqli_query($db,"SELECT * FROM singer ORDER BY id desc" );
@@ -341,30 +352,34 @@ require_once "config/config.php";
 	 for($i=0;$i<mysqli_num_rows($result);$i++)
       {
 		  
-   
+        echo "<p>";
+
       echo "<a href='index.php?data=singer&id=".$row[$i]['id']."'>". $row[$i]['name'] ."</a></br>";
- 
+      echo "<//p>";
+
 	
 
       }
-	   echo "<a href='index.php?data=nsinger'>More..</a>";
+	   echo "<a href='index.php?data=nsinger' id='more'>More..</a>";
 		  }else{
 		  for($i=0;$i<=6;$i++)
       {
 		  
-     
+        echo "<p>";
+
        echo "<a href='index.php?data=singer&id=".$row[$i]['id']."'>". $row[$i]['name'] ."</a></br>";
  
-	
+       echo "</p>";
+
 
       }
-		    echo "<a href='index.php?data=nsinger'>More..</a>";
+		    echo "<a href='index.php?data=nsinger' id='more'>More..</a>";
 		  
 	  }
 		  
 		  ?>
 		  </div>
-          <div class="hits">Special Collection</br>
+          <div class="hits"><h4>Special Collection</h4>
 		   <?php
 		      $result = mysqli_query($db,"SELECT DISTINCT genre FROM song_details ORDER BY id desc" );
 
@@ -375,24 +390,28 @@ require_once "config/config.php";
 	 for($i=0;$i<count($row);$i++)
       {
 		  
-   
+        echo "<p>";
+
       echo "<a href='index.php?data=song&id=".$row[$i]['id']."'>". $row[$i]['genre'] ."Songs</a></br>";
- 
+      echo "</p>";
+
 	
 
       }
-	   echo "<a href='index.php?data=nsong'>More..</a>";
+	   echo "<a href='index.php?data=nsong' id='more'>More..</a>";
 		  }else{
 		  for($i=0;$i<=6;$i++)
       {
 		  
-     
+        echo "<p>";
+
        echo "<a href='index.php?data=song&id=".$row[$i]['id']."'>". $row[$i]['genre'] ."Songs</a></br>";
  
-	
+       echo "</p>";
+
 
       }
-		    echo "<a href='index.php?data=nsong'>More..</a>";
+		    echo "<a href='index.php?data=nsong' id='more'>More..</a>";
 		  
 	  }
 		  

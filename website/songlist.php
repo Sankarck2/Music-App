@@ -42,7 +42,7 @@ readfile($file_url);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">    <link rel="stylesheet" href="css/songlist.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">    
 
     <!-- JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -59,7 +59,7 @@ readfile($file_url);
         <div class="header-container">
             <div class="header-image"></div>
             <div class="nav-bar">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <nav class="navbar navbar-expand-lg navbar-light">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-icon"></span>
                     </button>
@@ -128,8 +128,7 @@ $coursedata = $result->fetch_assoc();
                 <tr><td><b>Music Director</b> : <a href="#"> <?php echo $coursedata['musicname']?></a></td></tr> 
                 <tr><td><b>Release Year</b> :  <?php  echo date('Y',strtotime($coursedata['date']));?></td></tr>            
             
-				    <tr><td><b>Bitrates</b> : 128kbps, 320kbps
-</td></tr> 
+				    <tr><td><b>Bitrates</b> : 128kbps, 320kbps</td></tr> 
               </table>
             </div>
           </div>
@@ -162,14 +161,14 @@ $result = $db->query($sql);
 $coursedata1 = $result->fetch_assoc();
     
 	
-	   echo "  <p><i class='fa fa-microphon' aria-hidden='true'></i> Artist : ".$coursedata1['name']."</p>";
+	   echo "  <p><i class='fa fa-microphone' aria-hidden='true'></i> Artist : ".$coursedata1['name']."</p>";
   
 	  echo "  <p><i class='fa fa-clock-o' aria-hidden='true'></i> Duration : 3:00min</p>";
 
    echo "</div>";
    
 
-	
+   echo "<div class='downloadbuttons'>";
 	 echo "<form method='POST' action='#'>";
 	 echo "<input type='hidden' name='128' value='../".$row[$i]['audio']."'/>";
 	  echo "<button name='submit128'>Download 128kbs</button>";
@@ -177,7 +176,9 @@ $coursedata1 = $result->fetch_assoc();
 	 echo "<form method='POST' action='#'>";
 	 echo "<input type='hidden' name='320' value='..".$row[$i]['audio320']."'/>";
 	  echo "<button name='submit320'>Download 320kbs</button>";
-	echo "</form>";
+  echo "</form>";
+  echo "</div>";
+
                
                
    
@@ -194,16 +195,53 @@ $coursedata1 = $result->fetch_assoc();
           <div class="disclaimer"></div>
       </div>
         <div class="tab2">
-          <div class="hits"><p>Share on social media</p></div>
-          <div class="hits"><p>Related Movies</p></div>
-          <div class="hits"><p>Latest Movies</p></div>
-          <div class="hits"><p>Top Albums</p></div>
+          <div class="hits">
+          <h4>Share on social media</h4>
+            <div>
+              <p>
+                <i class="fa fa-whatsapp" aria-hidden="true"></i>
+              </p>
+              <p>
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+              </p>  
+              <p>
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+              </p>
+            </div>
+          </div>
+          <div class="hits">
+            <h4>Related Movies</h4>
+            <div>
+              <img src="" alt="" height='80px' width='80px'>
+              <img src="" alt="" height='80px' width='80px'>
+              <img src="" alt="" height='80px' width='80px'>
+            </div>
+            <a href="#">More..</a>
+          </div>
+          <div class="hits">
+            <h4>Latest Movies</h4>
+            <div>
+              <img src="" alt="" height='80px' width='80px'>
+              <img src="" alt="" height='80px' width='80px'>
+              <img src="" alt="" height='80px' width='80px'>
+            </div>
+            <a href="#">More..</a>
+
+          </div>
+          <div class="hits"><h4>Top Albums</h4>
+          <div>
+              <img src="" alt="" height='80px' width='80px'>
+              <img src="" alt="" height='80px' width='80px'>
+              <img src="" alt="" height='80px' width='80px'>
+            </div>
+            <a href="#">More..</a>
+
         </div>
       
     </section>
     <div class="Relatedmovies">
-        <h4>Related Movies</h4>
-		
+        <h4>RELATED MOVIES</h4>
+        <div class='relatedmoviecard'>
 		<?php
 		
 		
@@ -216,11 +254,12 @@ $coursedata1 = $result->fetch_assoc();
       echo " <img src=../". $row['thumb_img'] ."  height='10px' width='10px'>";
       echo "<div class='tab3'><p>" . $row['song_name'] . "</p>";
       echo "<p>". $row['movie_name'] ."</p>";
-      echo " </div> </div>  ";
+      echo " </div> </div> ";
+
       }
       mysqli_close($con);
 		?>
-		
+		</div>
        
     </div>
         <footer class="footer">

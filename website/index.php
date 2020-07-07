@@ -243,9 +243,9 @@ mysqli_close($con);
 		
 	}
 	else if($_REQUEST['data']=="artist"){
-		
-		echo "put dat div here";
-		
+    
+    echo "put dat div here";
+
 		$result = mysqli_query($db,"SELECT * FROM music_directors where id=".$_REQUEST['id']." order by id desc" );
 
 while($row = mysqli_fetch_array($result))
