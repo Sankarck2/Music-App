@@ -32,7 +32,7 @@ require_once "config/config.php";
         <div class="header-container">
             <div class="header-image"></div>
             <div class="nav-bar">
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <nav class="navbar navbar-expand-lg navbar-dark">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-icon"></span>
                     </button>
@@ -193,33 +193,35 @@ require_once "config/config.php";
         
         else{
           
-      $result = mysqli_query($db,"SELECT distinct movie_name,artist_name,movie_name,thumb_img,id FROM song_details ORDER BY date desc" );
+      $result = mysqli_query($db,"SELECT distinct movie_name,artist_name FROM song_details" );
+
 
       while($row = mysqli_fetch_array($result))
       {
         
         
-      echo "<div class='card'><a href='songlist.php?data=album&id=".$row['id']."'>";
+      echo "<div class='card'><a href='songlist.php?data=album&id=".$row['movie_name']."'>";
 
      
 
 	
 	  
-	  $sql = "SELECT * FROM movie where id=". $row['movie_name'];
-$result = $db->query($sql);
+	  $sql1 = "SELECT * FROM movie where id=". $row['movie_name'];
+	
+$result1 = $db->query($sql1);
 
 
 
-$coursedata1 = $result->fetch_assoc();
+$coursedata1 = $result1->fetch_assoc();
 
  echo " <img src=../". $coursedata1['img'] ."  height='150px' width='180px'>";
       echo "<h4>" . $coursedata1['name'] . "</h4>";
 	  $sql = "SELECT * FROM music_directors where id=". $row['artist_name'];
-$result = $db->query($sql);
+$result2= $db->query($sql);
 
 
 
-$coursedata = $result->fetch_assoc();
+$coursedata = $result2->fetch_assoc();
 
       echo "<p>". $coursedata['name'] ."</p>";
       echo " </div></a>";

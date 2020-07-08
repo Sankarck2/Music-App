@@ -74,29 +74,29 @@ require_once "config/config.php";
 	 if($_REQUEST['data']=="2020"){
 		
 
-  $result = mysqli_query($db,"SELECT distinct movie_name,artist_name,movie_name,thumb_img,id FROM song_details where date like '%2020%'");
+  $result = mysqli_query($db,"SELECT distinct movie_name,artist_name FROM song_details where date like '%2020%'");
   while($row = mysqli_fetch_array($result))
       {
         
         
-      echo "<div class='card'><a href='songlist.php?data=album&id=".$row['id']."'>";
+      echo "<div class='card'><a href='songlist.php?data=album&id=".$row['movie_name']."'>";
 
    
 	  
-	  $sql = "SELECT * FROM movie where id=". $row['movie_name'];
-$result = $db->query($sql);
+	  $sql1 = "SELECT * FROM movie where id=". $row['movie_name'];
+$result1 = $db->query($sql1);
 
 
 
-$coursedata1 = $result->fetch_assoc();
+$coursedata1 = $result1->fetch_assoc();
    echo " <img src=../". $coursedata1['img'] ."  height='150px' width='180px'>";
       echo "<h4>" . $coursedata1['name'] . "</h4>";
-	  $sql = "SELECT * FROM music_directors where id=". $row['artist_name'];
-$result = $db->query($sql);
+	  $sql2 = "SELECT * FROM music_directors where id=". $row['artist_name'];
+$result2 = $db->query($sql2);
 
 
 
-$coursedata = $result->fetch_assoc();
+$coursedata = $result2->fetch_assoc();
 
       echo "<p>". $coursedata['name'] ."</p>";
       echo " </div></a>";
@@ -112,29 +112,30 @@ mysqli_close($con);
 		
 	
 
-$result = mysqli_query($db,"SELECT distinct movie_name,artist_name,movie_name,thumb_img,id FROM song_details where date like '%".$_REQUEST['id']."%'");
+$result = mysqli_query($db,"SELECT distinct movie_name,artist_name FROM song_details where date like '%".$_REQUEST['id']."%'");
   while($row = mysqli_fetch_array($result))
       {
         
         
-      echo "<div class='card'><a href='songlist.php?data=album&id=".$row['id']."'>";
+      echo "<div class='card'><a href='songlist.php?data=album&id=".$row['movie_name']."'>";
 
-      echo " <img src=../". $row['thumb_img'] ."  height='150px' width='180px'>";
+     
+	  $sql1 = "SELECT * FROM movie where id=". $row['movie_name'];
+$result1 = $db->query($sql1);
+
+
+
+$coursedata1 = $result1->fetch_assoc();
+ echo " <img src=../". $coursedata1['img'] ."  height='150px' width='180px'>";
 	  
-	  $sql = "SELECT * FROM movie where id=". $row['movie_name'];
-$result = $db->query($sql);
-
-
-
-$coursedata1 = $result->fetch_assoc();
 
       echo "<h4>" . $coursedata1['name'] . "</h4>";
 	  $sql = "SELECT * FROM music_directors where id=". $row['artist_name'];
-$result = $db->query($sql);
+$result2 = $db->query($sql);
 
 
 
-$coursedata = $result->fetch_assoc();
+$coursedata = $result2->fetch_assoc();
 
       echo "<p>". $coursedata['name'] ."</p>";
       echo " </div></a>";
@@ -189,10 +190,10 @@ mysqli_close($con);
 	
 	else if($_REQUEST['data']=="search"){
 		
-		$result = mysqli_query($db,"SELECT * FROM song_details where movie_name like '%".$_POST['search']."%'");
+	
 		
 		
-$result = mysqli_query($db,"SELECT * from movie where name like '".$_REQUEST['id']."%'");
+$result = mysqli_query($db,"SELECT * from movie where name like '".$_POST['search']."%'");
  	
 		
 //$result = mysqli_query($db,"SELECT distinct sd.movie_name,sd.artist_name,sd.thumb_img,sd.id FROM song_details sd inner join movie m on m.id=sd.movie_name where m.name like '".$_REQUEST['id']."%'");
@@ -201,14 +202,14 @@ $result = mysqli_query($db,"SELECT * from movie where name like '".$_REQUEST['id
   while($row = mysqli_fetch_array($result))
       {
         
-        	  $sql = "SELECT distinct movie_name,artist_name,id FROM song_details where movie_name=". $row['id'];
+        	  $sql = "SELECT distinct movie_name,artist_name FROM song_details where movie_name=". $row['id'];
 $result2 = $db->query($sql);
 
 
 
 $coursedata1 = $result2->fetch_assoc();
 
-      echo "<div class='card'><a href='songlist.php?data=album&id=".$coursedata1['id']."'>";
+      echo "<div class='card'><a href='songlist.php?data=album&id=".$coursedata1['movie_name']."'>";
 
       echo " <img src=../". $row['img'] ."  height='150px' width='180px'>";
 	  
@@ -272,30 +273,30 @@ mysqli_close($con);
 	
 	else if($_REQUEST['data']=="umovies"){
 		
+  $result = mysqli_query($db,"SELECT distinct movie_name,artist_name FROM song_details ORDER BY date desc");
 
-$result = mysqli_query($db,"SELECT distinct movie_name,artist_name,movie_name,thumb_img,id FROM song_details ORDER BY date desc");
   while($row = mysqli_fetch_array($result))
       {
         
         
-      echo "<div class='card'><a href='songlist.php?data=album&id=".$row['id']."'>";
+      echo "<div class='card'><a href='songlist.php?data=album&id=".$row['movie_name']."'>";
 
 
 	  
 	  $sql = "SELECT * FROM movie where id=". $row['movie_name'];
-$result = $db->query($sql);
+$result1 = $db->query($sql);
 
 
 
-$coursedata1 = $result->fetch_assoc();
+$coursedata1 = $result1->fetch_assoc();
       echo " <img src='../". $coursedata1['img'] ."'  height='150px' width='180px'>";
       echo "<h4>" . $coursedata1['name'] . "</h4>";
-	  $sql = "SELECT * FROM music_directors where id=". $row['artist_name'];
-$result = $db->query($sql);
+	  $sql1 = "SELECT * FROM music_directors where id=". $row['artist_name'];
+$result2= $db->query($sql1);
 
 
 
-$coursedata = $result->fetch_assoc();
+$coursedata = $result2->fetch_assoc();
 
       echo "<p>". $coursedata['name'] ."</p>";
       echo " </div></a>";
@@ -309,29 +310,30 @@ mysqli_close($con);
 	}
 	else if($_REQUEST['data']=="recent"){
 		
-$result = mysqli_query($db,"SELECT distinct movie_name,artist_name,movie_name,thumb_img,id FROM song_details order by id desc");
+$result = mysqli_query($db,"SELECT distinct movie_name,artist_name FROM song_details order by id desc");
+
   while($row = mysqli_fetch_array($result))
       {
         
         
-      echo "<div class='card'><a href='songlist.php?data=album&id=".$row['id']."'>";
+      echo "<div class='card'><a href='songlist.php?data=album&id=".$row['movie_name']."'>";
 
     
 	  
 	  $sql = "SELECT * FROM movie where id=". $row['movie_name'];
-$result = $db->query($sql);
+$result1 = $db->query($sql);
 
 
 
-$coursedata1 = $result->fetch_assoc();
+$coursedata1 = $result1->fetch_assoc();
   echo " <img src=../". $coursedata1['img'] ."  height='150px' width='180px'>";
       echo "<h4>" . $coursedata1['name'] . "</h4>";
-	  $sql = "SELECT * FROM music_directors where id=". $row['artist_name'];
-$result = $db->query($sql);
+	  $sql1 = "SELECT * FROM music_directors where id=". $row['artist_name'];
+$result2 = $db->query($sql1);
 
 
 
-$coursedata = $result->fetch_assoc();
+$coursedata = $result2->fetch_assoc();
 
       echo "<p>". $coursedata['name'] ."</p>";
       echo " </div></a>";
@@ -344,31 +346,19 @@ mysqli_close($con);
 	}else if($_REQUEST['data']=="myear"){
 		
 		$result = mysqli_query($db,"SELECT * FROM year order by year desc" );
-$result = mysqli_query($db,"SELECT distinct movie_name,artist_name,movie_name,thumb_img,id FROM song_details where date like '%".$_REQUEST['id']."%'");
+
   while($row = mysqli_fetch_array($result))
       {
         
+	
         
-      echo "<div class='card'><a href='songlist.php?data=album&id=".$row['id']."'>";
+      echo "<div class='card'><a href='index.php?data=year&id=".$row['year']."'>";
 
-      echo " <img src=../". $row['thumb_img'] ."  height='150px' width='180px'>";
+      echo " <img src=../". $row['img'] ."  height='150px' width='180px'>";
 	  
-	  $sql = "SELECT * FROM movie where id=". $row['movie_name'];
-$result = $db->query($sql);
-
-
-
-$coursedata1 = $result->fetch_assoc();
-
-      echo "<h4>" . $coursedata1['name'] . "</h4>";
-	  $sql = "SELECT * FROM music_directors where id=". $row['artist_name'];
-$result = $db->query($sql);
-
-
-
-$coursedata = $result->fetch_assoc();
-
-      echo "<p>". $coursedata['name'] ."</p>";
+	
+      echo "<h4>" . $row['year'] . "</h4>";
+	 
       echo " </div></a>";
 
 
@@ -418,27 +408,35 @@ mysqli_close($con);
 	
     echo "put dat div here";
 
-		$result = mysqli_query($db,"SELECT Distint movie_name,sd.*,m.name FROM song_details sd inner join music_directors m on m.id=sd.artist_name where sd.id=".$_REQUEST['id']."" );
-print_r("SELECT Distint sd.movie_name,sd.*,m.name FROM song_details sd inner join music_directors m on m.id=sd.artist_name where sd.artist_name=".$_REQUEST['id']."");die;
-while($row = mysqli_fetch_array($result))
-{
-	
-	 echo "<div class='card'> <a href='songlist.php?data=album&id=".$row['id']."'>";
+		$result = mysqli_query($db,"SELECT Distinct movie_name,sd.artist_name,m.name FROM song_details sd inner join music_directors m on m.id=sd.artist_name where m.id=".$_REQUEST['id']."" );
+ while($row = mysqli_fetch_array($result))
+      {
+        
+        
+      echo "<div class='card'><a href='songlist.php?data=album&id=".$row['movie_name']."'>";
 
-      echo " <img src=../". $row['thumb_img'] ."  height='150px' width='180px'>";
-      echo "<h4>" . $row['name'] . "</h4>";
-      echo "<p>". $row['movie_name'] ."</p>";
-      echo "</a> </div>";
-	
-echo "<div class='card'>";
-
-echo " <img src=../". $row['img'] ."  height='150px' width='180px'>";
-echo "<h4 > <a href='index.php?data=artist&id=".$row['id']."'>" . $row['name'] . "</a></h4>";
-
-echo " </div>";
+  
+	  $sql = "SELECT * FROM movie where id=". $row['movie_name'];
+$result1 = $db->query($sql);
 
 
-}
+
+$coursedata1 = $result1->fetch_assoc();
+    echo " <img src=../". $coursedata1['img'] ."  height='150px' width='180px'>";
+	  
+      echo "<h4>" . $coursedata1['name'] . "</h4>";
+	  $sql1 = "SELECT * FROM music_directors where id=". $row['artist_name'];
+$result2 = $db->query($sql1);
+
+
+
+$coursedata = $result2->fetch_assoc();
+
+      echo "<p>". $coursedata['name'] ."</p>";
+      echo " </div></a>";
+
+
+	  }
 
 
 mysqli_close($con);

@@ -98,7 +98,7 @@ readfile($file_url);
 	   <?php
 
 	 if($_REQUEST['data']=="album"){
-		$sql = "SELECT s.*,si.name as singername,a.name as actorname,m.name as musicname FROM song_details s INNER JOIN  singer si on si.id=s.singer INNER JOIN actor a on a.id=s.actor_name INNER JOIN  music_directors  m on m.id=s.artist_name  where s.id=".$_REQUEST['id'];
+		$sql = "SELECT s.*,si.name as singername,a.name as actorname,m.name as musicname FROM song_details s INNER JOIN  singer si on si.id=s.singer INNER JOIN actor a on a.id=s.actor_name INNER JOIN  music_directors  m on m.id=s.artist_name  where s.movie_name=".$_REQUEST['id'];
 
 
 $result = $db->query($sql);
