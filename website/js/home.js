@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         div.className = "alphabet"
         div.innerHTML = item;
         div.onclick = function() {  
-		    window.location.href=`home.php?data=alpha&id=${item}`
+		    window.location.href=`index.php?data=alpha&id=${item}`
             selectedMovieLetter.innerHTML = `Tamil ${item} Movie Collection`
         };
         return div

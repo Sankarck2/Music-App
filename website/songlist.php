@@ -110,14 +110,20 @@ $coursedata = $result->fetch_assoc();
 
 		
 	}
+		  $sql = "SELECT * FROM movie where id=". $coursedata['movie_name'];
+$result = $db->query($sql);
+
+
+
+$coursedata1 = $result->fetch_assoc();
 	
 	?>
 		
 	
-        <h4>MOVIE NAME</h4>
+        <h4><?php echo $coursedata1['name']?></h4>
           <div class="completeDetails">
 		  <?php
-		   echo " <img src=../". $coursedata['thumb_img'] ." >";
+		   echo " <img src=../". $coursedata1['img'] ." >";
 		  ?>
         
             <div class="alldetails">
@@ -154,11 +160,11 @@ $coursedata = $result->fetch_assoc();
 			$sql = "SELECT * FROM music_directors where id='".$row[$i]['artist_name']."'";
 			
 		
-$result = $db->query($sql);
+$result1 = $db->query($sql);
 
 
 
-$coursedata1 = $result->fetch_assoc();
+$coursedata1 = $result1->fetch_assoc();
     
 	
 	   echo "  <p><i class='fa fa-microphone' aria-hidden='true'></i> Artist : ".$coursedata1['name']."</p>";
@@ -244,8 +250,39 @@ $coursedata1 = $result->fetch_assoc();
         <div class='relatedmoviecard'>
 		<?php
 		
+		$result = mysqli_query($db,"SELECT distinct movie_name,artist_name,movie_name,thumb_img,id FROM song_details ORDER BY date desc" );
+
+      while($row = mysqli_fetch_array($result))
+      {
+        
+        
+      echo "<div class='moviecard'><a href='songlist.php?data=album&id=".$row['id']."'>";
+
+      echo " <img src=../". $row['thumb_img'] ."  height='10px' width='10px'>";
+	  
+	  $sql = "SELECT * FROM movie where id=". $row['movie_name'];
+$result = $db->query($sql);
+
+
+
+$coursedata1 = $result->fetch_assoc();
+ echo "<div class='tab3'><p>" .  $coursedata1['name'] . "</p>";
+
+  
+	  $sql = "SELECT * FROM music_directors where id=". $row['artist_name'];
+$result = $db->query($sql);
+
+
+
+$coursedata = $result->fetch_assoc();
+
+      echo "<p>". $coursedata['name'] ."</p>";
+      echo " </div></div></a>";
+
+	  }
 		
-		$result = mysqli_query($db,"SELECT * FROM song_details where date like '%2020%'" );
+		
+	/* 	$result = mysqli_query($db,"SELECT * FROM song_details where date like '%2020%'" );
 
       while($row = mysqli_fetch_array($result))
       {
@@ -256,7 +293,7 @@ $coursedata1 = $result->fetch_assoc();
       echo "<p>". $row['movie_name'] ."</p>";
       echo " </div> </div> ";
 
-      }
+      } */
       mysqli_close($con);
 		?>
 		</div>

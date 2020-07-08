@@ -30,5 +30,17 @@
               <p> Year</p>
             </a>
           </li>
+		   <li class="nav-item  item3" onclick="myFunction(item3)">
+            <a class="nav-link" href="./listmovie.php">
+              <i class="material-icons">Movie</i>
+              <p> Add Movie</p>
+            </a>
+          </li>
+		   <li class="nav-item  item3" onclick="myFunction(item3)">
+            <a class="nav-link" href="./listgenre.php">
+              <i class="material-icons">person</i>
+              <p> Add Genre</p>
+            </a>
+          </li>
         </ul>
 		

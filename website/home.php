@@ -40,18 +40,18 @@ require_once "config/config.php";
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                       <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                          <a class="nav-link" >Home <span class="sr-only">(current)</span></a>
+                          <a class="nav-link" href="home.php" >Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="home.php?data=2020">Tamil 2020 Movies</a>
+                          <a class="nav-link" href="index.php?data=2020">Tamil 2020 Movies</a>
                         </li>
                       
                         <li class="nav-item">
-                          <a class="nav-link " href="home.php?data=umovies" tabindex="-1" aria-disabled="true">Upcoming Movies</a>
+                          <a class="nav-link " href="index.php?data=umovies" tabindex="-1" aria-disabled="true">Upcoming Movies</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link " href="home.php?data=recent" tabhome="-1" aria-disabled="true">Recent Updates</a>
+                            <a class="nav-link " href="index.php?data=recent" tabhome="-1" aria-disabled="true">Recent Updates</a>
                           </li>
                       </ul>
                       <form class="form-inline my-2 my-lg-0" method="POST" action="home.php?data=search" >
@@ -193,18 +193,36 @@ require_once "config/config.php";
         
         else{
           
-      $result = mysqli_query($db,"SELECT * FROM song_details ORDER BY date desc" );
+      $result = mysqli_query($db,"SELECT distinct movie_name,artist_name,movie_name,thumb_img,id FROM song_details ORDER BY date desc" );
 
       while($row = mysqli_fetch_array($result))
       {
         
         
-      echo "<div class='card'>";
+      echo "<div class='card'><a href='songlist.php?data=album&id=".$row['id']."'>";
 
-      echo " <img src=../". $row['thumb_img'] ."  height='150px' width='180px'>";
-      echo "<h4>" . $row['song_name'] . "</h4>";
-      echo "<p>". $row['movie_name'] ."</p>";
-      echo " </div>";
+     
+
+	
+	  
+	  $sql = "SELECT * FROM movie where id=". $row['movie_name'];
+$result = $db->query($sql);
+
+
+
+$coursedata1 = $result->fetch_assoc();
+
+ echo " <img src=../". $coursedata1['img'] ."  height='150px' width='180px'>";
+      echo "<h4>" . $coursedata1['name'] . "</h4>";
+	  $sql = "SELECT * FROM music_directors where id=". $row['artist_name'];
+$result = $db->query($sql);
+
+
+
+$coursedata = $result->fetch_assoc();
+
+      echo "<p>". $coursedata['name'] ."</p>";
+      echo " </div></a>";
 
 
       }
@@ -274,7 +292,7 @@ require_once "config/config.php";
 		  
         echo "<p>";
 
-      echo "<a href='specificsinger.php?data=artist&id=".$row1[$j]['id']."'>". $row1[$j]['name'] ."</a></br>";
+      echo "<a href='index.php?data=artist&id=".$row1[$j]['id']."'>". $row1[$j]['name'] ."</a></br>";
       echo "</p>";
 
 	
@@ -287,7 +305,7 @@ require_once "config/config.php";
 		  
         echo "<p>";
 
-         echo "<a href='specificsinger.php?data=artist&id=".$row1[$j]['id']."'>". $row1[$j]['name'] ."</a></br>";
+         echo "<a href='index.php?data=artist&id=".$row1[$j]['id']."'>". $row1[$j]['name'] ."</a></br>";
          echo "</p>";
 
 

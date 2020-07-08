@@ -128,11 +128,12 @@ require_once "sidemenu.php";
           <div class="row">
 
             <div class="col-md-12">
-              <button type="button" class="btn btn-primary pull-right registerBtn" onclick="window.location.href='./user.php?id=0'">Register</button>
-
+			
+              <button type="button" class="btn btn-primary pull-right registerBtn" onclick="window.location.href='./genre.php?id=0'">Add Genre</button>
+ <button type="button" class="btn btn-primary pull-right registerBtn" onclick="window.location.href='./listgenre.php'">Back</button>
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title ">Song List</h4>
+                  <h4 class="card-title ">Genre List</h4>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
@@ -146,7 +147,7 @@ require_once "config/config.php";
 
 
 
-$sql = "DELETE FROM song_details where id=".$_REQUEST['id'];
+$sql = "DELETE FROM genre where id=".$_REQUEST['id'];
 $result = $db->query($sql);
 
 
@@ -155,7 +156,7 @@ $result = $db->query($sql);
 
 }
 
-$result = mysqli_query($db,"SELECT * FROM song_details ");
+$result = mysqli_query($db,"SELECT * FROM genre");
 
 echo " <table class='table'>
                       <thead class=' text-primary'>
@@ -163,13 +164,9 @@ echo " <table class='table'>
                          ID
                         </th>
                         <th>
-                         Song Name
+                         Year
                         </th>
-                        
-                      
-                        <th>
-                          Movie name
-                        </th>
+                     
 						 <th>
                           Edit
                         </th>
@@ -183,20 +180,10 @@ while($row = mysqli_fetch_array($result))
 {
 echo "<tr>";
 echo "<td>" . $row['id'] . "</td>";
-echo "<td>" . $row['song_name'] . "</td>";
+echo "<td>" . $row['name'] . "</td>";
 
-
-$sql = "SELECT * FROM movie where id=". $row['movie_name'];
-$result1 = $db->query($sql);
-
-
-
-$coursedata = $result1->fetch_assoc();
-
-echo "<td>" . $coursedata['name'] . "</td>";
-
-echo "<td><a href='./user.php?id=".$row['id']."'>Edit</a></td>";
-echo "<td><a href='./dashboard.php?id=".$row['id']."&value=delete'>Delete</a></td>";
+echo "<td><a href='./genre.php?id=".$row['id']."'>Edit</a></td>";
+echo "<td><a href='./listgenre.php?id=".$row['id']."&value=delete'>Delete</a></td>";
 
 echo "</tr>";
 }

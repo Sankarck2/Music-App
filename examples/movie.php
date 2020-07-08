@@ -10,6 +10,98 @@ Coded by Creative Tim
 =========================================================
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
 <!DOCTYPE html>
+
+<?php
+require_once "config/config.php";
+
+
+if(isset($_POST['sub'])){
+
+$name=$_POST['name'];
+
+
+$thumb1=$_POST['thumb'];
+
+
+  	
+	$target_path = $_SERVER["CONTEXT_DOCUMENT_ROOT"]."/examples/uploads/movie/";
+
+	
+
+
+
+$target_path = $target_path.basename($_FILES['thumbnail']['name']);
+
+$nmusic="";
+	$nthumb="";
+
+
+$targ1="examples/uploads/movie/".basename($_FILES['thumbnail']['name']);
+
+
+
+   $img=move_uploaded_file($_FILES['thumbnail']['tmp_name'], $target_path);
+
+
+	    echo '<script>document.getElementById("thumb").value="'.$img.'";</script>';
+	 
+
+if($_POST['id']=="0"){
+	   
+	   
+$query ="INSERT INTO movie(name, img) VALUES ( '".$name."','".$targ1."')";
+        mysqli_query($db, $query);
+
+   }else{
+	   
+
+	$query =" UPDATE movie
+SET  name = '". $name."', img= '". (($_FILES['thumbnail']['name']!="")?$targ1:$thumb1)."'
+WHERE id = '". $_POST['id']."'";
+	      mysqli_query($db, $query);
+		  
+		  
+		  
+	   
+   }
+   
+   
+        header("location: listmovie.php");
+   
+
+
+}
+if($_REQUEST['value']=="delete"){
+
+
+
+
+$sql = "DELETE FROM movie where id=".$_REQUEST['id'];
+$result = $db->query($sql);
+
+
+
+
+
+}
+if($_REQUEST['id']!="0"){
+
+
+
+
+$sql = "SELECT * FROM movie where id=".$_REQUEST['id'];
+$result = $db->query($sql);
+
+
+
+$coursedata = $result->fetch_assoc();
+
+}
+
+?>
+
+
+
 <html lang="en">
 
 <head>
@@ -22,32 +114,29 @@ The above copyright notice and this permission notice shall be included in all c
   </title>
   <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css"
-    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
   <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="../assets/demo/demo.css" rel="stylesheet" />
-  <style>
-    *{
-      box-sizing: border-box;
-    }
-    .registerBtn{
-      margin-bottom: 25px;
-      margin-right: 15px;
-    }
-  </style>
+  <link href="../css/registration.css" rel="stylesheet" media="all">
+
 </head>
 
 <body class="">
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+      <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+        Tip 2: you can also add an image using data-image tag
+    -->
       <div class="logo"><a href="http://www.creative-tim.com" class="simple-text logo-normal">
           Creative Tim
         </a></div>
-      <div class="sidebar-wrapper ">
-           <?php
+      <div class="sidebar-wrapper">
+             <?php
 require_once "sidemenu.php";
 ?>
       </div>
@@ -57,10 +146,9 @@ require_once "sidemenu.php";
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;">Dashboard</a>
+            <a class="navbar-brand" href="javascript:;">User Profile</a>
           </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
-            aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
             <span class="navbar-toggler-icon icon-bar"></span>
             <span class="navbar-toggler-icon icon-bar"></span>
@@ -86,8 +174,7 @@ require_once "sidemenu.php";
                 </a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="material-icons">notifications</i>
                   <span class="notification">5</span>
                   <p class="d-lg-none d-md-block">
@@ -103,8 +190,7 @@ require_once "sidemenu.php";
                 </div>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="material-icons">person</i>
                   <p class="d-lg-none d-md-block">
                     Account
@@ -122,101 +208,80 @@ require_once "sidemenu.php";
         </div>
       </nav>
       <!-- End Navbar -->
-      <div class="content">
-        <div class="container-fluid">
-
-          <div class="row">
-
-            <div class="col-md-12">
-              <button type="button" class="btn btn-primary pull-right registerBtn" onclick="window.location.href='./user.php?id=0'">Register</button>
-
-              <div class="card">
-                <div class="card-header card-header-primary">
-                  <h4 class="card-title ">Song List</h4>
+      <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+            <div class="card card-5">
+                <div class="card-heading">
+                    <h2 class="title">ADD Movie Name</h2>
                 </div>
                 <div class="card-body">
-                  <div class="table-responsive">
-				  <?php
-				  
-			
-require_once "config/config.php";
-
-	  if($_REQUEST['value']=="delete"){
-
-
-
-
-$sql = "DELETE FROM song_details where id=".$_REQUEST['id'];
-$result = $db->query($sql);
-
-
-
-
-
-}
-
-$result = mysqli_query($db,"SELECT * FROM song_details ");
-
-echo " <table class='table'>
-                      <thead class=' text-primary'>
-                        <th>
-                         ID
-                        </th>
-                        <th>
-                         Song Name
-                        </th>
-                        
+                    <form enctype="multipart/form-data" action="#" method="POST"  >
+                  
+						
+                        <div class="form-row">
+                            <div class="name">Enter Movie Name</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-5" type="text"  name="name" value="<?php echo (isset($coursedata['name'])) ? $coursedata['name'] : '';?>">
+                                </div>
+                            </div>
+                        </div>
+                    
                       
-                        <th>
-                          Movie name
-                        </th>
-						 <th>
-                          Edit
-                        </th>
-						 <th>
-                       Delete
-                        </th>
-                      </thead>
-					    <tbody>";
+                        <!-- <div class="form-row">
+                            <div class="name">Subject</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <div class="rs-select2 js-select-simple select--no-search">
+                                        <select name="subject">
+                                            <option disabled="disabled" selected="selected">Choose option</option>
+                                            <option>Melody</option>
+                                            <option>Folk</option>
+                                            <option>Theme </option>
+                                        </select>
+                                        <div class="select-dropdown"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
 
-while($row = mysqli_fetch_array($result))
-{
-echo "<tr>";
-echo "<td>" . $row['id'] . "</td>";
-echo "<td>" . $row['song_name'] . "</td>";
+                       <div class="form-row m-b-55">
+                            <div class="name">Thumbnail</div>
+                            <div class="value">
+                                <div class="input-group">
+                                        <div class="input-group-desc">
+                                            <input class="input--style-5" type="file" name="thumbnail" accept="image/x-png,image/gif,image/jpeg" >
+                                        </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
 
 
-$sql = "SELECT * FROM movie where id=". $row['movie_name'];
-$result1 = $db->query($sql);
-
-
-
-$coursedata = $result1->fetch_assoc();
-
-echo "<td>" . $coursedata['name'] . "</td>";
-
-echo "<td><a href='./user.php?id=".$row['id']."'>Edit</a></td>";
-echo "<td><a href='./dashboard.php?id=".$row['id']."&value=delete'>Delete</a></td>";
-
-echo "</tr>";
-}
-echo "  </tbody></table>";
-
-mysqli_close($con);
-?>
-             
-                  </div>
+							
+							    <input class='input--style-5' type='hidden' id='thumb' name='thumb'   value='<?php echo (isset($coursedata['img'])) ? $coursedata['img'] : '';?>'>
+                             
+					
+				
+                    
+						
+							
+						
+               
+                      
+                        <div>
+						     <input class="input--style-5" type="hidden" name="id" value="<?php echo (isset($_REQUEST['id'])) ?$_REQUEST['id'] : '';?>">
+                            <button class="btn btn--radius-2 btn--red"  name="sub" type="submit">Add</button>
+                        </div>
+                    </form>
                 </div>
-              </div>
             </div>
-
-          </div>
         </div>
       </div>
-
+      
     </div>
   </div>
-
+  
   <!--   Core JS Files   -->
   <script src="../assets/js/core/jquery.min.js"></script>
   <script src="../assets/js/core/popper.min.js"></script>
@@ -261,8 +326,8 @@ mysqli_close($con);
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="../assets/demo/demo.js"></script>
   <script>
-    $(document).ready(function () {
-      $().ready(function () {
+    $(document).ready(function() {
+      $().ready(function() {
         $sidebar = $('.sidebar');
 
         $sidebar_img_container = $sidebar.find('.sidebar-background');
@@ -282,7 +347,7 @@ mysqli_close($con);
 
         }
 
-        $('.fixed-plugin a').click(function (event) {
+        $('.fixed-plugin a').click(function(event) {
           // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
           if ($(this).hasClass('switch-trigger')) {
             if (event.stopPropagation) {
@@ -293,7 +358,7 @@ mysqli_close($con);
           }
         });
 
-        $('.fixed-plugin .active-color span').click(function () {
+        $('.fixed-plugin .active-color span').click(function() {
           $full_page_background = $('.full-page-background');
 
           $(this).siblings().removeClass('active');
@@ -314,7 +379,7 @@ mysqli_close($con);
           }
         });
 
-        $('.fixed-plugin .background-color .badge').click(function () {
+        $('.fixed-plugin .background-color .badge').click(function() {
           $(this).siblings().removeClass('active');
           $(this).addClass('active');
 
@@ -325,7 +390,7 @@ mysqli_close($con);
           }
         });
 
-        $('.fixed-plugin .img-holder').click(function () {
+        $('.fixed-plugin .img-holder').click(function() {
           $full_page_background = $('.full-page-background');
 
           $(this).parent('li').siblings().removeClass('active');
@@ -335,7 +400,7 @@ mysqli_close($con);
           var new_image = $(this).find("img").attr('src');
 
           if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
-            $sidebar_img_container.fadeOut('fast', function () {
+            $sidebar_img_container.fadeOut('fast', function() {
               $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
               $sidebar_img_container.fadeIn('fast');
             });
@@ -344,7 +409,7 @@ mysqli_close($con);
           if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
             var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
 
-            $full_page_background.fadeOut('fast', function () {
+            $full_page_background.fadeOut('fast', function() {
               $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
               $full_page_background.fadeIn('fast');
             });
@@ -363,7 +428,7 @@ mysqli_close($con);
           }
         });
 
-        $('.switch-sidebar-image input').change(function () {
+        $('.switch-sidebar-image input').change(function() {
           $full_page_background = $('.full-page-background');
 
           $input = $(this);
@@ -395,7 +460,7 @@ mysqli_close($con);
           }
         });
 
-        $('.switch-sidebar-mini input').change(function () {
+        $('.switch-sidebar-mini input').change(function() {
           $body = $('body');
 
           $input = $(this);
@@ -410,7 +475,7 @@ mysqli_close($con);
 
             $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
 
-            setTimeout(function () {
+            setTimeout(function() {
               $('body').addClass('sidebar-mini');
 
               md.misc.sidebar_mini_active = true;
@@ -418,12 +483,12 @@ mysqli_close($con);
           }
 
           // we simulate the window Resize so the charts will get updated in realtime.
-          var simulateWindowResize = setInterval(function () {
+          var simulateWindowResize = setInterval(function() {
             window.dispatchEvent(new Event('resize'));
           }, 180);
 
           // we stop the simulation of Window Resize after the animations are completed
-          setTimeout(function () {
+          setTimeout(function() {
             clearInterval(simulateWindowResize);
           }, 1000);
 

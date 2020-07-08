@@ -16,23 +16,8 @@ require_once "config/config.php";
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 if(isset($_POST['sub'])){
+
 
 $sname=$_POST['song_name'];
 $aname=$_POST['artist_name'];
@@ -79,7 +64,8 @@ $audio320=move_uploaded_file($_FILES['audio_track320']['tmp_name'], $target_path
 	   
 	   
 $query ="INSERT INTO song_details(direction,starring,production,song_name, movie_name,singer,actor_name, artist_name,genre,date,thumb_img,audio,audio320) VALUES ( '". $dname."','".$starname."','".$pname."','". $sname."','".$mname."','".$singername."','".$actorname."','".$aname."','". $genre."','".$date."','".$targ1."','".$targ2."','".$targ3."' )";
-        mysqli_query($db, $query);
+
+	  mysqli_query($db, $query);
 
    }else{
 	   
@@ -167,6 +153,26 @@ $selectsinger = '<option value="">--Select--</option>';
 while($row2 = mysqli_fetch_array($result2)){
 $selectesinger = ($coursedata['singer'] == $row2['id']) ? 'selected="selected"' : '';	
 	$selectsinger .= '<option value="'. $row2['id'].'" '.$selectesinger.'>'.$row2['name'].'</option>';
+}
+
+
+$result3 = mysqli_query($db,"SELECT * FROM movie");
+$selectmovie = '<option value="">--Select--</option>';
+
+//echo $coursedata->event_id; die;
+while($row3= mysqli_fetch_array($result3)){
+$selectemovie = ($coursedata['movie_name'] == $row3['id']) ? 'selected="selected"' : '';	
+	$selectmovie .= '<option value="'. $row3['id'].'" '.$selectemovie.'>'.$row3['name'].'</option>';
+}
+
+
+$result4 = mysqli_query($db,"SELECT * FROM genre");
+$selectgenre= '<option value="">--Select--</option>';
+
+//echo $coursedata->event_id; die;
+while($row4= mysqli_fetch_array($result4)){
+$selectegenre= ($coursedata['genre'] == $row4['id']) ? 'selected="selected"' : '';	
+	$selectgenre .= '<option value="'. $row4['id'].'" '.$selectegenre.'>'.$row4['name'].'</option>';
 }
 
 ?>
@@ -299,20 +305,25 @@ require_once "sidemenu.php";
                  
 						
 					
-                        <div class="form-row">
-                            <div class="name">Movie Name</div>
+							  <div class="form-row">
+                              <div class="name">Movie Name</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-5" type="text" name="movie_name" value="<?php echo (isset($coursedata['movie_name'])) ? $coursedata['movie_name'] : '';?>">
+                                    <div class="rs-select2 js-select-simple select--no-search">
+                                          <select class="input--style-5" name="movie_name" id="movie_name" >
+	                              <?php  echo $selectmovie;?>
+	                                    </select>	
+                                        <div class="select-dropdown"></div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> 
 							  <div class="form-row">
                               <div class="name">Artist Name</div>
                             <div class="value">
                                 <div class="input-group">
                                     <div class="rs-select2 js-select-simple select--no-search">
-                                          <select name="artist_name" id="artist_name" >
+                                          <select class="input--style-5" name="artist_name" id="artist_name" >
 	                              <?php  echo $selectartist;?>
 	                                    </select>	
                                         <div class="select-dropdown"></div>
@@ -325,7 +336,7 @@ require_once "sidemenu.php";
                             <div class="value">
                                 <div class="input-group">
                                     <div class="rs-select2 js-select-simple select--no-search">
-                                          <select name="actor_name" id="actor_name" >
+                                          <select class="input--style-5" name="actor_name" id="actor_name" >
 	                              <?php  echo $selectactor;?>
 	                                    </select>	
                                         <div class="select-dropdown"></div>
@@ -346,14 +357,20 @@ require_once "sidemenu.php";
                                 </div>
                             </div>
                         </div> 
-                        <div class="form-row">
-                            <div class="name">Genre</div>
+                       
+							  <div class="form-row">
+                              <div class="name">Genre Name</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-5" type="text" name="genre" value="<?php echo (isset($coursedata['genre'])) ?$coursedata['genre']: '';?>">
+                                    <div class="rs-select2 js-select-simple select--no-search">
+                                          <select class="input--style-5" name="genre" id="genre" >
+	                              <?php  echo $selectgenre;?>
+	                                    </select>	
+                                        <div class="select-dropdown"></div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> 
 						     <div class="form-row">
                             <div class="name">Starring</div>
                             <div class="value">
@@ -382,17 +399,7 @@ require_once "sidemenu.php";
 	
                     
 
-                        <div class="form-row m-b-55">
-                            <div class="name">Thumbnail</div>
-                            <div class="value">
-                                <div class="input-group">
-                                        <div class="input-group-desc">
-                                            <input class="input--style-5" type="file" name="thumbnail" accept="image/x-png,image/gif,image/jpeg" >
-                                        </div>
-                                   
-                                </div>
-                            </div>
-                        </div>
+                
 
 
 							
