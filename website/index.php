@@ -25,6 +25,7 @@ require_once "config/config.php";
     
     <link rel="stylesheet" href="css/style.css"/>
     <script type="text/javascript" src="js/index.js"></script>
+
     <title>Document</title>
 </head>
 <body>
@@ -746,7 +747,7 @@ $result = $db->query($sql);
 $coursedata = $result->fetch_assoc();
 
       echo "<p>". $coursedata['name'] ."</p>";
-      echo " </div></a>";
+      echo " </a></div>";
 
 
 	  }

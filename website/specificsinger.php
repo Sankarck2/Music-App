@@ -117,7 +117,7 @@ readfile($file_url);
       echo "<div class='downloadDetails'>";
         echo "<div class='songDetails'>";
           echo "  <p><i class='fa fa-music' aria-hidden='true'></i> Song Name : ".$row['song_name']."</p>";
-          echo "  <p><i class='fa fa-clock-o' aria-hidden='true'></i>  Duration :  5:00 min</p>";
+          echo "  <p><i class='fa fa-clock-o' aria-hidden='true'></i>  Duration :  ".$row['audiomin']." min</p>";
 		  
 		    
 	  $sql = "SELECT * FROM movie where id=". $row['movie_name'];

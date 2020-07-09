@@ -32,6 +32,8 @@ $music2=$_POST['music320'];
 $pname=$_POST['production'];
 $starname=$_POST['starring'];
 $dname=$_POST['direction'];
+$duration=$_POST['duration'];
+$duration320=$_POST['duration320'];
   	
 	$target_path = $_SERVER["CONTEXT_DOCUMENT_ROOT"]."/examples/uploads/thumbimg/";
 	$target_path1 = $_SERVER["CONTEXT_DOCUMENT_ROOT"]."/examples/uploads/music/";
@@ -61,9 +63,9 @@ $audio320=move_uploaded_file($_FILES['audio_track320']['tmp_name'], $target_path
     echo '<script>document.getElementById("music320").value="'.$audio320.'";</script>';
 
     if($_POST['id']=="0"){
+
 	   
-	   
-$query ="INSERT INTO song_details(direction,starring,production,song_name, movie_name,singer,actor_name, artist_name,genre,date,thumb_img,audio,audio320) VALUES ( '". $dname."','".$starname."','".$pname."','". $sname."','".$mname."','".$singername."','".$actorname."','".$aname."','". $genre."','".$date."','".$targ1."','".$targ2."','".$targ3."' )";
+$query ="INSERT INTO song_details(audiomin,audio320min,direction,starring,production,song_name, movie_name,singer,actor_name, artist_name,genre,date,thumb_img,audio,audio320) VALUES ( '". $duration."','". $duration320."','". $dname."','".$starname."','".$pname."','". $sname."','".$mname."','".$singername."','".$actorname."','".$aname."','". $genre."','".$date."','".$targ1."','".$targ2."','".$targ3."' )";
 
 	  mysqli_query($db, $query);
 
@@ -71,7 +73,7 @@ $query ="INSERT INTO song_details(direction,starring,production,song_name, movie
 	   
 
 	$query =" UPDATE song_details
-SET direction = '". $dname."',starring = '". $starname."',production = '". $pname."',song_name = '". $sname."', movie_name= '". $mname."', singer= '". $singername."', actor_name= '". $actorname."',artist_name = '". $aname."',genre = '". $genre."', date= '". $date."', thumb_img= '". (($_FILES['thumbnail']['name']!="")?$targ1:$thumb1)."', audio= '".(($_FILES['audio_track']['name']!="")?$targ2:$music1)."'
+SET audiomin = '". $duration."',audio320min = '". $duration320."', direction = '". $dname."',starring = '". $starname."',production = '". $pname."',song_name = '". $sname."', movie_name= '". $mname."', singer= '". $singername."', actor_name= '". $actorname."',artist_name = '". $aname."',genre = '". $genre."', date= '". $date."', thumb_img= '". (($_FILES['thumbnail']['name']!="")?$targ1:$thumb1)."', audio= '".(($_FILES['audio_track']['name']!="")?$targ2:$music1)."'
 , audio320= '".(($_FILES['audio_track320']['name']!="")?$targ3:$music2)."' WHERE id = '". $_POST['id']."'";
 	      mysqli_query($db, $query);
 		  
@@ -177,7 +179,9 @@ $selectegenre= ($coursedata['genre'] == $row4['id']) ? 'selected="selected"' : '
 
 ?>
 
+<script>
 
+</script>
 
 <html lang="en">
 
@@ -398,7 +402,8 @@ require_once "sidemenu.php";
 						
 	
                     
-
+<audio id="audio"></audio>
+<audio id="audio320"></audio>
                 
 
 
@@ -412,14 +417,14 @@ require_once "sidemenu.php";
                             <div class="value">
                                 <div class="input-group">
                                         <div class="input-group-desc">
-                                            <input class="input--style-5" accept="audio/mp3,audio/*;capture=microphone" type="file" name="audio_track" >
+                                            <input class="input--style-5" accept="audio/mp3,audio/*;capture=microphone" type="file" id="audio_track" name="audio_track" >
                                         </div>
                                    
                                 </div>
                             </div>
                         </div>
 					
-						
+						   <input class='input--style-5' type='hidden' id='duration' name='duration' value='<?php echo (isset($coursedata['audiomin'])) ? $coursedata['audiomin'] : '';?>'>
 							
 							   <input class='input--style-5' type='hidden' id='music' name='music' value='<?php echo (isset($coursedata['audio'])) ? $coursedata['audio'] : '';?>'>
                        
@@ -430,14 +435,14 @@ require_once "sidemenu.php";
                             <div class="value">
                                 <div class="input-group">
                                         <div class="input-group-desc">
-                                            <input class="input--style-5" accept="audio/mp3,audio/*;capture=microphone" type="file" name="audio_track320" >
+                                            <input class="input--style-5" accept="audio/mp3,audio/*;capture=microphone" type="file" id="audio_track320" name="audio_track320" >
                                         </div>
                                    
                                 </div>
                             </div>
                         </div>
 					
-						
+						   <input class='input--style-5' type='hidden' id='duration320' name='duration320' value='<?php echo (isset($coursedata['audiomin320'])) ? $coursedata['audiomin320'] : '';?>'>
 							
 							   <input class='input--style-5' type='hidden' id='music320' name='music320' value='<?php echo (isset($coursedata['audio320'])) ? $coursedata['audio320'] : '';?>'>
                 					   
@@ -509,6 +514,54 @@ require_once "sidemenu.php";
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="../assets/demo/demo.js"></script>
   <script>
+  
+  
+var objectUrl1;
+
+$("#audio320").on("canplaythrough", function(e){
+    var seconds = e.currentTarget.duration;
+    var duration = moment.duration(seconds, "seconds");
+    
+    var time = "";
+    var hours = duration.hours();
+    if (hours > 0) { time = hours + ":" ; }
+    
+    time = time + duration.minutes() + ":" + duration.seconds();
+    $("#duration320").val(time);
+    
+    URL.revokeObjectURL(objectUrl1);
+});
+
+var objectUrl;
+
+$("#audio").on("canplaythrough", function(e){
+    var seconds = e.currentTarget.duration;
+    var duration = moment.duration(seconds, "seconds");
+    
+    var time = "";
+    var hours = duration.hours();
+    if (hours > 0) { time = hours + ":" ; }
+    
+    time = time + duration.minutes() + ":" + duration.seconds();
+    $("#duration").val(time);
+    
+    URL.revokeObjectURL(objectUrl);
+});
+$("#audio_track320").change(function(e){
+    var file = e.currentTarget.files[0];
+   
+    
+    objectUrl = URL.createObjectURL(file);
+    $("#audio320").prop("src", objectUrl);
+});
+
+$("#audio_track").change(function(e){
+    var file = e.currentTarget.files[0];
+ 
+    objectUrl = URL.createObjectURL(file);
+    $("#audio").prop("src", objectUrl);
+});
+  
     $(document).ready(function() {
       $().ready(function() {
         $sidebar = $('.sidebar');

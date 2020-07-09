@@ -169,7 +169,7 @@ $coursedata1 = $result1->fetch_assoc();
 	
 	   echo "  <p><i class='fa fa-microphone' aria-hidden='true'></i> Artist : ".$coursedata1['name']."</p>";
   
-	  echo "  <p><i class='fa fa-clock-o' aria-hidden='true'></i> Duration : 3:00min</p>";
+	  echo "  <p><i class='fa fa-clock-o' aria-hidden='true'></i> Duration :  ".$row[$i]['audiomin']." min</p>";
 
    echo "</div>";
    
