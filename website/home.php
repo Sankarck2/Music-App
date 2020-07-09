@@ -374,7 +374,7 @@ $coursedata = $result2->fetch_assoc();
 		  
         echo "<p>";
 
-      echo "<a href='index.php?data=singer&id=".$row[$i]['id']."'>". $row[$i]['name'] ."</a></br>";
+      echo "<a href='specificsinger.php?data=singer&id=".$row[$i]['id']."'>". $row[$i]['name'] ."</a></br>";
       echo "<//p>";
 
 	
@@ -387,7 +387,7 @@ $coursedata = $result2->fetch_assoc();
 		  
         echo "<p>";
 
-       echo "<a href='index.php?data=singer&id=".$row[$i]['id']."'>". $row[$i]['name'] ."</a></br>";
+       echo "<a href='specificsinger.php?data=singer&id=".$row[$i]['id']."'>". $row[$i]['name'] ."</a></br>";
  
        echo "</p>";
 
@@ -401,7 +401,7 @@ $coursedata = $result2->fetch_assoc();
 		  </div>
           <div class="hits"><h4>Special Collection</h4>
 		   <?php
-		      $result = mysqli_query($db,"SELECT DISTINCT genre FROM song_details ORDER BY id desc" );
+		      $result = mysqli_query($db,"SELECT  * FROM genre ORDER BY id desc" );
 
      $row =mysqli_fetch_all($result, MYSQLI_ASSOC);
 	
@@ -412,7 +412,7 @@ $coursedata = $result2->fetch_assoc();
 		  
         echo "<p>";
 
-      echo "<a href='index.php?data=song&id=".$row[$i]['id']."'>". $row[$i]['genre'] ."Songs</a></br>";
+      echo "<a href='specificsinger.php?data=genre&id=".$row[$i]['id']."'>". $row[$i]['name'] ." Songs</a></br>";
       echo "</p>";
 
 	
@@ -425,7 +425,7 @@ $coursedata = $result2->fetch_assoc();
 		  
         echo "<p>";
 
-       echo "<a href='index.php?data=song&id=".$row[$i]['id']."'>". $row[$i]['genre'] ."Songs</a></br>";
+       echo "<a href='specificsinger.php?data=genre&id=".$row[$i]['id']."'>". $row[$i]['name'] ." Songs</a></br>";
  
        echo "</p>";
 

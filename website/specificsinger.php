@@ -98,7 +98,17 @@ readfile($file_url);
     </header>
     <section class="main">
      <?php
-	 $result = mysqli_query($db,"SELECT * FROM song_details where artist_name=".$_REQUEST['id']);
+	 $result="";
+	 
+	
+	 if($_REQUEST['data']=="singer"){
+	
+	 $result = mysqli_query($db,"SELECT * FROM song_details where singer=".$_REQUEST['id']);
+	 }
+	 else{
+		 
+		  $result = mysqli_query($db,"SELECT * FROM song_details where genre=".$_REQUEST['id']);
+	 }
 
 
 
@@ -108,7 +118,17 @@ readfile($file_url);
         echo "<div class='songDetails'>";
           echo "  <p><i class='fa fa-music' aria-hidden='true'></i> Song Name : ".$row['song_name']."</p>";
           echo "  <p><i class='fa fa-clock-o' aria-hidden='true'></i>  Duration :  5:00 min</p>";
-          echo "  <p><i class='fa fa-microphone' aria-hidden='true'></i> Movie Name : ".$row['move_name']."</p>";
+		  
+		    
+	  $sql = "SELECT * FROM movie where id=". $row['movie_name'];
+$result = $db->query($sql);
+
+
+
+$coursedata1 = $result->fetch_assoc();
+		  
+		  
+          echo "  <p><i class='fa fa-microphone' aria-hidden='true'></i> Movie Name : ".$coursedata1['name']."</p>";
         echo " </div>";
         echo "<div class='downloadbuttons'> ";
           echo "<form method='POST' action='#'>";
