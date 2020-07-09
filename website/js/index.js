@@ -19,5 +19,12 @@ document.addEventListener('DOMContentLoaded',()=>{
     })
 })
 
+$(function() {
+	$('.main').easyPaginate({
+		paginateElement: 'div',
+		elementsPerPage: 1,
+		effect: 'default'
+	});
+});
 
 
