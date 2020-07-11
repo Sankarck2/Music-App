@@ -24,6 +24,9 @@ require_once "config/config.php";
     
     <link rel="stylesheet" href="css/home.css"/>
     <script type="text/javascript" src="js/home.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="js/jquery.easyPaginate.js"></script>
+
     <title>Document</title>
 </head>
 <body>
@@ -69,7 +72,7 @@ require_once "config/config.php";
         </div>
     </header>
     <section class="main">
-      <div class="song-section">
+      <div class="song-section" id="contain">
       <?php
 	 if($_REQUEST['data']=="2020"){
 		

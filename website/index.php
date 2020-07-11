@@ -23,7 +23,7 @@ require_once "config/config.php";
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="jquery.easyPaginate.js"></script>
+    <script src="js/jquery.easyPaginate.js"></script>
 
     <link rel="stylesheet" href="css/style.css"/>
     <script type="text/javascript" src="js/index.js"></script>
@@ -72,7 +72,7 @@ require_once "config/config.php";
             
         </div>
     </header>
-    <section class="main">
+    <section class="main" id="contain">
     <?php
 	 if($_REQUEST['data']=="2020"){
 		
@@ -766,7 +766,7 @@ mysqli_close($con);
     </div> -->
        
     </section>
-    <footer class="footer">
+    <footer >
          &copy; 2020 All Rights Reserved
           </footer>
     </div>

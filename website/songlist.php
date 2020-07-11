@@ -139,7 +139,6 @@ $coursedata1 = $result->fetch_assoc();
             </div>
           </div>
           <h4>SONG NAME</h4>
-          <div class="downloadDetails">
 		  <?php
 		  
 		     $result = mysqli_query($db,"SELECT * FROM song_details where movie_name='".$coursedata['movie_name']."'" );
@@ -151,8 +150,8 @@ $coursedata1 = $result->fetch_assoc();
 	 for($i=0;$i<mysqli_num_rows($result);$i++)
       {
 		
-   
-     echo " <div class='songDetails'>";
+        
+     echo " <div class='downloadDetails'><div class='songDetails'> ";
    
     echo "  <p><i class='fa fa-music' aria-hidden='true'></i> Song Name : ".$row[$i]['song_name']."</p>";
 	
@@ -184,6 +183,7 @@ $coursedata1 = $result1->fetch_assoc();
 	  echo "<button name='submit320'>Download 320kbs</button>";
   echo "</form>";
   echo "</div>";
+  echo "</div>";
 
                
                
@@ -197,7 +197,6 @@ $coursedata1 = $result1->fetch_assoc();
 		  
             
               
-          </div>
           <div class="disclaimer"></div>
       </div>
         <div class="tab2">

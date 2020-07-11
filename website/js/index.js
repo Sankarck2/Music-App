@@ -20,9 +20,10 @@ document.addEventListener('DOMContentLoaded',()=>{
 })
 
 $(function() {
+    console.log('Sankar')
 	$('.main').easyPaginate({
 		paginateElement: 'div',
-		elementsPerPage: 1,
+		elementsPerPage: 2,
 		effect: 'default'
 	});
 });

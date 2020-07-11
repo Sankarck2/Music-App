@@ -156,6 +156,7 @@ nav{
     border: 1px gray solid ;
     margin-top:5px;
     text-align: center;
+    overflow-y: scroll;
 }
 .hits p{
     text-align: justify;
@@ -216,6 +217,24 @@ footer{
     .hits{
         margin:5px;
     }
+
+    .easyPaginateNav{
+        position: absolute;
+        bottom: 50px;
+        left: 36%;
+        width: 50%;
+        margin: auto;
+        padding-bottom: 5px;
+        left: 27rem;
+        padding: 1.5rem;
+        z-index: 100;
+        color: red;
+        display: flex;
+        justify-content: center;
+        width: 100px;
+        margin: auto;
+        background: yellow;
+        line-height: 1.5rem;}
 
    
 }

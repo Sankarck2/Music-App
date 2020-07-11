@@ -139,7 +139,7 @@ nav{
     flex-direction: column;
     width : 65%;
     border: 1px gray solid ;
-    height: 48rem;
+    min-height: 48rem;
     margin-left: 0.5rem;
     -webkit-box-shadow: 0px 7px 11px 0px rgba(50, 50, 50, 0.65);
     -moz-box-shadow:    0px 7px 11px 0px rgba(50, 50, 50, 0.65);
@@ -276,6 +276,7 @@ table{
     display:flex;
     border-bottom:1px solid #adadad;
     flex-wrap:wrap;
+    padding-top: 1rem;
 }
 
 .downloadbuttons{

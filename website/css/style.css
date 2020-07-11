@@ -134,6 +134,23 @@ nav{
    margin-top:7px
 }
 
+.easyPaginateNav{
+    position: absolute;
+    bottom: 50px;
+    text-align: center;
+    padding-bottom: 10px;
+    /* left: 50%;
+    transform: translateX(-50%) translateY(-50%); */
+    /* margin: auto; */
+}
+
+.easyPaginateNav a{
+    margin: 0.25rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: darkblue
+}
+
 footer{
     bottom: 0%;
     position: absolute;
@@ -196,6 +213,23 @@ footer{
         overflow-y: scroll;
         flex-basis: 100%;
 
+    }
+
+    .easyPaginateNav{
+        position: absolute;
+        bottom: 50px;
+        text-align: center;
+        padding-bottom: 10px;
+        /* left: 50%;
+        transform: translateX(-50%) translateY(-50%); */
+        /* margin: auto; */
+    }
+    
+    .easyPaginateNav a{
+        margin: 0.25rem;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: darkblue
     }
 
 }

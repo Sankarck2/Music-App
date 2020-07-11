@@ -19,3 +19,13 @@ document.addEventListener('DOMContentLoaded',()=>{
     })
 })
 
+$(function() {
+    console.log('Sankar')
+	$('#contain').easyPaginate({
+		paginateElement: 'div',
+		elementsPerPage: 15,
+		effect: 'default'
+	});
+});
+
+
